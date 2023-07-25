@@ -1,0 +1,19 @@
+.App {
+    display: flex;
+  }
+  
+  .left-panel {
+    flex: 1;
+    background-color: #f0f0f0;
+    padding: 20px;
+  }
+  
+  .section {
+    margin-bottom: 20px;
+  }
+  
+  .right-panel {
+    flex: 3;
+    padding: 20px;
+  }
+  
