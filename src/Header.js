@@ -17,29 +17,6 @@ const Header = () => {
           </li>
         </ul>
       </nav>
-      <ul className="social-links">
-        <li>
-          <img
-            src="/facebook-logo.png"
-            alt="Facebook"
-            onClick={() => handleSocialMediaClick('https://www.facebook.com/')}
-          />
-        </li>
-        <li>
-          <img
-            src="/linkedin-logo.png"
-            alt="LinkedIn"
-            onClick={() => handleSocialMediaClick('https://www.linkedin.com/')}
-          />
-        </li>
-        <li>
-          <img
-            src="/twitter-logo.png"
-            alt="Twitter"
-            onClick={() => handleSocialMediaClick('https://www.twitter.com/')}
-          />
-        </li>
-      </ul>
     </header>
   );
 };

@@ -16,7 +16,7 @@
 
 .left-panel {
   flex: 1;
-  background-color: #f9f9f9; /* Set a light background color */
+  background-color: #73707b ; /* Set a light background color */
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -35,7 +35,8 @@
 
 .content {
   display: none;
-  background-color: #fff;
+  background-color: #73707b
+  ;
   padding: 10px;
 }
 

@@ -12,7 +12,7 @@ function App() {
         <LeftPanel />
         <div className="right-panel">
           <div className="title">
-            <h1>Welcome to My Landing Page</h1>
+            <h1>Welcome to Calculus</h1>
           </div>
           <p>This is a simple landing page with four sections on the left panel.</p>
         </div>
