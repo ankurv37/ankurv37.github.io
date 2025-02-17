@@ -1,26 +1,49 @@
-// GoogleLoginButton.js
 import React from 'react';
-import { GoogleLogin } from 'react-google-login';
+import { FcGoogle } from 'react-icons/fc';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
+import './GoogleLoginButton.css';
 
 const GoogleLoginButton = () => {
-  const responseGoogle = (response) => {
-    console.log(response); // Handle the Google response here
-  };
+  
+    function handleLoginSuccess(response) {
+      console.log('Login Success: ', response.profileObj);
+      // handle the successful login here, e.g. by updating your app's state or making an API call
+    }
+  
+    function handleLoginFailure(response) {
+      console.error('Login Failed: ', response);
+      // handle the failed login here, e.g. by showing an error message to the user
+    }
 
+  
+  
   return (
     <div>
-      <GoogleLogin
-        clientId="32191415057-35gi9jqbrp086pkob8oorvh25hgjg8pf.apps.googleusercontent.com"
-        buttonText="Login with Google"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-        cookiePolicy={'single_host_origin'}
-      />
+          <div className="">
+            <GoogleOAuthProvider 
+                clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                >
+             <GoogleLogin
+              render={(renderProps) => (
+                <button
+                  type="button"
+                  className="GoogleLoginButton"
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                >
+                  <FcGoogle className="" /> Sign in with google
+                </button>
+              )}
+              onSuccess={handleLoginSuccess}
+              onFailure={handleLoginFailure}
+              cookiePolicy="single_host_origin"
+            />
+            </GoogleOAuthProvider>
+          </div>
     </div>
-  );
-};
+  )
+}
 
-export default GoogleLoginButton;
-
-
+export default GoogleLoginButton
 

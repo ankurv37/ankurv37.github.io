@@ -1,10 +1,16 @@
 import React from 'react';
+import GoogleLoginButton from './GoogleLoginButton';
 
 const Home = () => {
   return (
     <div>
-      {/* Content for the Home route */}
-      <h2>Home Section</h2>
+      <div className="title">
+        <h1>Welcome to Calculus</h1>
+      </div>
+      <p>This is a simple landing page with four sections on the left panel.</p>
+      <main>
+        <GoogleLoginButton />
+      </main>
     </div>
   );
 }

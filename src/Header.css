@@ -2,8 +2,10 @@
 
 
 .site-header {
-    background-color: #333;
-    color: #fff;
+  background-color: #8fc563 ; /* Set a light background color */
+  position: relative; /* adjust as needed */
+  margin: 0; /* adjust as needed */
+  
     padding: 10px;
     font-size: 14px;
     display: flex;

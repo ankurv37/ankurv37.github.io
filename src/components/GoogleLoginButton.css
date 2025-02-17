@@ -1,0 +1,16 @@
+.GoogleLoginButton {
+    /* Add your custom styles here */
+    background-color: #4285f4; /* Google blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 200px; /* adjust as needed */
+}
+
+.GoogleLoginButton:hover {
+    background-color: #991070; /* Darker Google blue */
+}

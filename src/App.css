@@ -3,30 +3,21 @@
 .App {
   height: 100vh;
   position: relative;
+ 
 }
 
 .container {
   display: flex;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: relative;
 }
 
-.left-panel {
-  flex: 1;
-  background-color: #73707b ; /* Set a light background color */
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
+
 
 .section {
   margin-bottom: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+ 
 }
 
 .section:hover {
@@ -47,9 +38,28 @@
 .right-panel {
   flex: 3;
   padding: 20px;
+ 
+  
 }
 
 .title {
   margin-bottom: 20px;
   text-align: left;
+}
+
+
+main {
+  background-color: #4285f4; /* Google blue */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 200px; /* adjust as needed */
+}
+
+main:hover {
+  background-color: #991070; /* Darker Google blue */
 }
