@@ -6,69 +6,42 @@
 
 .container {
   display: flex;
-  padding-top: 64px;
+  padding-top: 0;  /* Changed from 64px */
 }
 
 .right-panel {
-  flex: 1;
+  flex: 3;
   margin-left: 250px;
   padding: 2rem;
+  min-height: 100vh;
 }
 
 .title {
+  margin-top: 20px;  /* Added to show Welcome message */
   margin-bottom: 2rem;
+  text-align: left;
+  display: block;  /* Added to ensure visibility */
 }
 
 .title h1 {
   font-size: 2.5rem;
   color: #2c3e50;
   margin-bottom: 1rem;
-}
-
-.section-content {
-  background: white;
-  border-radius: 8px;
-  padding: 2rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  margin-bottom: 2rem;
-}
-.section {
-  margin-bottom: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
- 
-}
-
-.section:hover {
-  background-color: #ddd; /* Add a hover effect on sections */
+  display: block;  /* Added to ensure visibility */
 }
 
 .content {
-  display: none;
-  background-color: #73707b
-  ;
+  display: block;  /* Changed from none to always show content */
+  background-color: #73707b;
   padding: 10px;
 }
 
-.section:hover .content {
-  display: block;
-}
-
-.right-panel {
-  flex: 3;
-  padding: 20px;
- 
-  
-}
-
-.title {
-  margin-bottom: 20px;
-  text-align: left;
-}
-
-
+/* Move login button to top right */
 main {
-  background-color: #4285f4; /* Google blue */
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #4285f4;
   color: white;
   border: none;
   border-radius: 5px;
@@ -76,7 +49,7 @@ main {
   font-size: 1em;
   cursor: pointer;
   transition: background-color 0.3s;
-  width: 200px; /* adjust as needed */
+  width: auto;  /* Changed from fixed width */
 }
 
 main:hover {
