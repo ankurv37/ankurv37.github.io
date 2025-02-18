@@ -1,22 +1,25 @@
 // Header.js
 import React from 'react';
-import './Header.css'; // Create a separate CSS file for Header component styles
+import './Header.css';
+import GoogleLoginButton from './components/GoogleLoginButton';
 
 const Header = () => {
-  // Event handler for clicking on social media links
-  const handleSocialMediaClick = (url) => {
-    window.open(url, '_blank'); // Open the URL in a new tab
-  };
-
   return (
     <header className="site-header">
+      <div className="header-left">
+        <h1>Ankur Verma</h1>
+        <p>Software Engineer</p>
+      </div>
       <nav className="nav-links">
         <ul>
-          <li>
-            <a href="#about">About</a>
-          </li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
+      <div className="header-right">
+        <GoogleLoginButton />
+      </div>
     </header>
   );
 };

@@ -1,45 +1,57 @@
 /* Header.css */
 
-
 .site-header {
-  background-color: #8fc563 ; /* Set a light background color */
-  position: relative; /* adjust as needed */
-  margin: 0; /* adjust as needed */
-  
-    padding: 10px;
-    font-size: 14px;
-    display: flex;
-    justify-content: flex-end; /* Align the header to the right */
-    align-items: center;
-    position: absolute;
-    top: 0;
-    right: 0; /* Set the right property to 0 to move the header to the right side */
-    left: auto; /* Set the left property to auto to align the left side of the header to the right side of the page */
-  }
-  
-  .nav-links ul,
-  .social-links {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .nav-links li,
-  .social-links li {
-    margin-right: 10px;
-  }
-  
-  .nav-links a,
-  .social-links a {
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .social-links a img {
-    height: 50px;
-    width: 50px;
-  }
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-left h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #2c3e50;
+}
+
+.header-left p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+.nav-links ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #2c3e50;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #3498db;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
   
   

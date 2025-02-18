@@ -1,42 +1,40 @@
 /* LeftPanel.css */
 
 .left-panel {
-  flex: 1;
-  background-color: #289cb1; /* Set a light background color */
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Add this line */
-  align-items: center; /* Add this line */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
-  min-height: 100vh; /* Add this line */
-  width: auto; /* adjust as needed */
-  margin: 0; /* adjust as needed */
-  box-sizing: border-box;
+  width: 250px;
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  min-height: 100vh;
+  padding: 2rem;
+  color: white;
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow-y: auto;
 }
-  .section {
-    margin-bottom: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    padding: 10px;
-    border-radius: 4px; /* Add rounded corners to sections */
-    background-color: #fff; /* Set a white background for sections */
-  }
-  
-  .section:hover {
-    background-color: #f0f0f0; /* Add a hover effect on sections */
-  }
-  
-  .content {
-    display: none;
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 4px; /* Add rounded corners to content */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a shadow to content */
-    background-color: #fff; /* Set a white background for content */
-  }
-  
-  .section:hover .content {
-    display: block;
-  }
+
+.section {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  transition: transform 0.3s ease;
+}
+
+.section:hover {
+  transform: translateX(5px);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.section h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.content {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  opacity: 0.9;
+}
   
