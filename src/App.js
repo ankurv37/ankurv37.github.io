@@ -1,35 +1,33 @@
-// App.js
 import React from 'react';
-import './App.css';
-import LeftPanel from './LeftPanel';
-import Header from './Header';
-import GoogleLoginButton from './components/GoogleLoginButton'; 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './components/Home'; 
-import Blogs from './components/Blogs';
-import Projects from './components/Projects';
-import Resume from './components/Resume';
-import OAuth2Callback from './components/OAuth2Callback';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import styled from 'styled-components';
+import Navigation from './components/Navigation';
+import MainContent from './components/MainContent';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
+const AppContainer = styled.div`
+  background: linear-gradient(45deg, #0f2027, #203a43, #2c5364);
+  min-height: 100vh;
+  color: #ffffff;
+`;
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <LeftPanel />
-        <div className="main-container">
-          <Header />
-          <div className="content-container">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/resume" element={<Resume />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/blogs" element={<Blogs />} />
-              <Route path="/oauth2callback" element={<OAuth2Callback />} />
-            </Routes>
-          </div>
-        </div>
-      </div>
-    </Router>
+    <GoogleOAuthProvider clientId="32191415057-35gi9jqbrp086pkob8oorvh25hgjg8pf.apps.googleusercontent.com">
+      <Router>
+        <AppContainer>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Navigation />
+            <MainContent />
+          </motion.div>
+        </AppContainer>
+      </Router>
+    </GoogleOAuthProvider>
   );
 }
 

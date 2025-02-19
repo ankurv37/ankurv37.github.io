@@ -1,46 +1,60 @@
 import React, { useState } from 'react';
-import { FcGoogle } from 'react-icons/fc';
-import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from 'jwt-decode';  // Fixed import syntax
-import './GoogleLoginButton.css';
+import { jwtDecode } from 'jwt-decode';
+import styled from 'styled-components';
+
+const UserContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+`;
+
+const ProfileImage = styled.img`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #00ff95;
+`;
+
+const UserName = styled.span`
+  font-size: 0.9rem;
+  color: white;
+`;
 
 const GoogleLoginButton = () => {
-  const CLIENT_ID = "32191415057-35gi9jqbrp086pkob8oorvh25hgjg8pf.apps.googleusercontent.com";
   const [user, setUser] = useState(null);
-  
-  function handleLoginSuccess(credentialResponse) {
-    const decoded = jwtDecode(credentialResponse.credential);  // Updated function call
+
+  const handleSuccess = (credentialResponse) => {
+    const decoded = jwtDecode(credentialResponse.credential);
     setUser(decoded);
-    console.log('Login Success: ', decoded);
-  }
-  
-  function handleLoginFailure(response) {
-    console.error('Login Failed: ', response);
-    setUser(null);
-  }
+    console.log('Login Success:', decoded);
+  };
 
   return (
     <div>
       {user ? (
-        <div className="user-info">
-          <img src={user.picture} alt="profile" className="profile-img" />
-          <span>{user.name}</span>
-        </div>
+        <UserContainer>
+          <ProfileImage 
+            src={user.picture} 
+            alt={user.name}
+            referrerPolicy="no-referrer"  // Add this to fix Google image loading
+          />
+          <UserName>{user.name}</UserName>
+        </UserContainer>
       ) : (
-        <div className="">
-          <GoogleOAuthProvider clientId={CLIENT_ID}>
-            <GoogleLogin
-              onSuccess={handleLoginSuccess}
-              onFailure={handleLoginFailure}
-              cookiePolicy="single_host_origin"
-            />
-          </GoogleOAuthProvider>
-        </div>
+        <GoogleLogin
+          onSuccess={handleSuccess}
+          onError={() => console.log('Login Failed')}
+          theme="filled_black"
+          shape="pill"
+        />
       )}
     </div>
   );
-}
+};
 
 export default GoogleLoginButton;
-
