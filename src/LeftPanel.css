@@ -1,17 +1,57 @@
 /* LeftPanel.css */
 
 .left-panel {
-  width: 250px;
+  width: var(--panel-width, 250px);
   background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-  min-height: 100vh;
+  height: 100vh;
   padding: 2rem;
   color: white;
   position: fixed;
   left: 0;
   top: 0;
   overflow-y: auto;
+  z-index: 200;
+  transition: width 0.3s ease;
 }
 
+.left-panel.collapsed {
+  --panel-width: 50px;
+  padding: 1rem;
+}
+
+.toggle-button {
+  position: absolute;
+  right: -15px;
+  top: 20px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resize-handle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  cursor: ew-resize;
+  background: transparent;
+}
+.section {
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 8px;
+  z-index: 1;
+}
 .section {
   margin-bottom: 2rem;
   padding: 1rem;

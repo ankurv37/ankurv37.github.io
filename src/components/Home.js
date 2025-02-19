@@ -5,12 +5,9 @@ const Home = () => {
   return (
     <div>
       <div className="title">
-        <h1>Welcome to Calculus</h1>
+        <h1>Calculus</h1>
       </div>
-      <p>This is a simple landing page with four sections on the left panel.</p>
-      <main>
-        <GoogleLoginButton />
-      </main>
+      <p>Welcome to my personal portfolio and blog.</p>
     </div>
   );
 }

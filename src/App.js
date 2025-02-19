@@ -9,23 +9,21 @@ import Home from './components/Home';
 import Blogs from './components/Blogs';
 import Projects from './components/Projects';
 import Resume from './components/Resume';
-import Contact from './components/Contact';
 import OAuth2Callback from './components/OAuth2Callback';
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <Header />
-        <div className="container">
-          <LeftPanel />
-          <div className="right-panel">
+        <LeftPanel />
+        <div className="main-container">
+          <Header />
+          <div className="content-container">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/resume" element={<Resume />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/blogs" element={<Blogs />} />
-              <Route path="/contact" element={<Contact />} />
               <Route path="/oauth2callback" element={<OAuth2Callback />} />
             </Routes>
           </div>

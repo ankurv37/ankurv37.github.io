@@ -1,21 +1,22 @@
 /* App.css */
 .App {
-  min-height: 100vh;
-  background-color: #f8f9fa;
-}
-
-.container {
   display: flex;
-  padding-top: 0;  /* Changed from 64px */
-}
-
-.right-panel {
-  flex: 3;
-  margin-left: 250px;
-  padding: 2rem;
   min-height: 100vh;
 }
 
+.main-container {
+  margin-left: var(--panel-width, 250px);
+  transition: margin-left 0.3s ease;
+  z-index: 2;  /* Higher than left panel */
+  position: relative;
+}
+
+.content-container {
+  padding: 2rem;
+  margin-top: var(--header-height, 70px);
+  position: relative;
+  transition: margin-top 0.3s ease;
+}
 .title {
   margin-top: 20px;  /* Added to show Welcome message */
   margin-bottom: 2rem;
