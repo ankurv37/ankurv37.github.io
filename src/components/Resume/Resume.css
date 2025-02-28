@@ -1,0 +1,33 @@
+.resume-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-size: 0.9rem;
+}
+
+.resume-container h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1.2rem;
+}
+
+.resume-container h3 {
+  font-size: 1.2rem;
+}
+
+.resume-container h4 {
+  font-size: 1rem;
+}
+
+.resume-container p,
+.resume-container li {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.resume-container ul {
+  margin-left: 1.2rem;
+}
+
+.resume-section {
+  margin-bottom: 2.5rem;
+}

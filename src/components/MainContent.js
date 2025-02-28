@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Home from './Home/Home';
 import Blog from './Blog/Blog';
-import Projects from './Projects/Projects';
+import Projects from './Projects/ProjectList';  // Update this line
 import Resume from './Resume/Resume';
 
 const MainContainer = styled.main`

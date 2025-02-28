@@ -1,0 +1,21 @@
+.education-section {
+  margin-bottom: 2rem;
+}
+
+.school {
+  color: #00ff95;
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.degree {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.period {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}

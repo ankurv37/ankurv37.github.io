@@ -1,38 +1,19 @@
 import React from 'react';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
-
-const EducationSection = styled.div`
-  margin-bottom: 2rem;
-`;
-
-const School = styled.h3`
-  color: #00ff95;
-  margin-bottom: 0.5rem;
-`;
-
-const Degree = styled.h4`
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 0.5rem;
-`;
-
-const Period = styled.p`
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-`;
+import './Education.css';
 
 const Education = () => {
   const education = [
     {
-      school: "Your University",
-      degree: "Bachelor of Technology in Computer Science",
-      period: "2016 - 2020",
-      details: [
-        "Graduated with First Class Honours",
-        "Specialized in Software Engineering",
-        "Key courses: Data Structures, Algorithms, Web Development"
-      ]
+      school: "University of Cincinnati",
+      degree: "Master of Science in Information Systems",
+      period: "December 2016",
+      details: ["GPA: 3.9"]
+    },
+    {
+      school: "National Institute of Technology Durgapur, India",
+      degree: "Bachelor of Technology in Electronics & Communication Engineering",
+      period: "June 2013",
+      details: ["CGPA - 8.53 (out of 10) Distinction"]
     }
   ];
 
@@ -40,16 +21,16 @@ const Education = () => {
     <div>
       <h2>Education</h2>
       {education.map((edu, index) => (
-        <EducationSection key={index}>
-          <School>{edu.school}</School>
-          <Degree>{edu.degree}</Degree>
-          <Period>{edu.period}</Period>
+        <div className="education-section" key={index}>
+          <h3 className="school">{edu.school}</h3>
+          <h4 className="degree">{edu.degree}</h4>
+          <p className="period">{edu.period}</p>
           <ul>
             {edu.details.map((detail, i) => (
               <li key={i}>{detail}</li>
             ))}
           </ul>
-        </EducationSection>
+        </div>
       ))}
     </div>
   );

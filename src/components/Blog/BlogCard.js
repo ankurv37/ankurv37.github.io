@@ -1,49 +1,23 @@
 import React from 'react';
-import styled from 'styled-components';
 import { motion } from 'framer-motion';
-
-const Card = styled(motion.div)`
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 15px;
-  padding: 1.5rem;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-  }
-`;
-
-const Title = styled.h3`
-  color: #00ff95;
-  margin-bottom: 1rem;
-`;
-
-const Tags = styled.div`
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 1rem;
-`;
-
-const Tag = styled.span`
-  background: rgba(0, 255, 149, 0.2);
-  padding: 0.2rem 0.8rem;
-  border-radius: 15px;
-  font-size: 0.8rem;
-`;
+import './BlogCard.css';
 
 const BlogCard = ({ blog }) => {
   return (
-    <Card>
-      <Title>{blog.title}</Title>
+    <motion.div
+      className="blog-card"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <h3 className="blog-card-title">{blog.title}</h3>
       <p>{blog.excerpt}</p>
-      <Tags>
+      <div className="blog-card-tags">
         {blog.tags.map((tag, index) => (
-          <Tag key={index}>{tag}</Tag>
+          <span key={index} className="blog-card-tag">{tag}</span>
         ))}
-      </Tags>
-    </Card>
+      </div>
+    </motion.div>
   );
 };
 
