@@ -7,9 +7,15 @@ import Projects from './Projects/ProjectList';  // Update this line
 import Resume from './Resume/Resume';
 
 const MainContainer = styled.main`
-  margin-left: 200px;
+  margin-left: 220px;
   padding: 2rem;
   min-height: 100vh;
+  position: relative;
+  
+  @media (max-width: 768px) {
+    margin-left: 0;
+    padding: 1rem;
+  }
 `;
 
 const MainContent = () => {

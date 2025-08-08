@@ -1,0 +1,20 @@
+<script src="wasm_exec.js"></script>
+<script>
+const go = new Go();
+WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject).then((result) => {
+    go.run(result.instance);
+
+    fetch("https://api.github.com/users/YOUR_USERNAME/events")
+        .then(res => res.json())
+        .then(data => {
+            const commits = data
+                .filter(e => e.type === "PushEvent")
+                .flatMap(e => e.payload.commits.map(c => e.created_at));
+            
+            const counts = processCommits(commits);
+            console.log("Daily commit counts:", counts);
+
+            // Visualization with Chart.js/D3.js here
+        });
+});
+</script>

@@ -1,26 +1,85 @@
 .home-container {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  max-width: 800px;
+  gap: 3rem;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 4rem 2rem;
+  position: relative;
+}
+
+.home-container::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(0, 255, 149, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.5; }
+  50% { transform: translateX(-50%) scale(1.2); opacity: 0.8; }
 }
 
 .title {
-  font-size: 4rem;
-  background: linear-gradient(45deg, #00ff95, #00ff95);
+  font-size: 4.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #00ff95 0%, #00d4aa 50%, #0099cc 100%);
+  background-size: 200% 200%;
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: slideInFromLeft 0.8s ease-out forwards;
+  animation: slideInFromLeft 0.8s ease-out forwards, gradientText 3s ease-in-out infinite;
+  text-align: center;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes gradientText {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 .description {
-  font-size: 1.5rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.6rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
   animation: slideInFromBottom 0.8s ease-out 0.2s forwards;
   opacity: 0;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 255, 149, 0.1);
+  position: relative;
+  z-index: 2;
+}
+
+.description::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 255, 149, 0.1) 0%, transparent 50%, rgba(0, 212, 255, 0.1) 100%);
+  border-radius: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.description:hover::before {
+  opacity: 1;
 }
 
 @keyframes slideInFromLeft {
