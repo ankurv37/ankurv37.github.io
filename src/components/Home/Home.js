@@ -1,6 +1,7 @@
 import React from 'react';
 import GitHubActivity from '../GitHubActivity';
 import ChaosDemo from '../ChaosDemo';
+import PongGame from '../PongGame/PongGame';
 import './Home.css';
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
       <GitHubActivity username="ankurv37" />
       
       <ChaosDemo />
+      <PongGame />
     </div>
   );
 };

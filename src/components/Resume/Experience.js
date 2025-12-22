@@ -38,8 +38,8 @@ const Experience = () => {
       company: "Anthem Inc., Mason, Ohio, USA",
       duration: "Sept 2019 - July 2022",
       responsibilities: [
-        "Developed a Golang-based API layer to automate IaC provisioning – prototyping Terraform modules for AWS EKS, ASG, ALB, and Serverless and leveraging GitOps process for Terraform VCS integration reducing rollout time from days to minutes",
-        "Developed dynamic pipeline orchestration converting user-defined graphs into DAGs leveraging Tekton APIs and generated pipeline for Java, Go, Node, React integrating DevSecOps tasks",
+        "Developed an API layer to automate IaC provisioning – prototyping Terraform modules for AWS EKS, ASG, ALB, and Serverless and leveraging GitOps process for Terraform VCS integration reducing rollout time from days to minutes",
+        "Developed Tekton pipelines for Java, Go, Node, React integrating DevSecOps tasks",
         "Developing prototypes for microservices/containers in multiple languages – Java, Go, Python, Node, React"
       ]
     },

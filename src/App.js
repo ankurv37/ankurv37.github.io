@@ -8,6 +8,9 @@ import './App.css';
 
 function App() {
   useEffect(() => {
+    // Set global background color
+    document.body.style.backgroundColor = '#E0F2F1';
+
     // Handle GitHub Pages SPA routing
     // Check if we have a redirected path from 404.html
     const search = window.location.search;

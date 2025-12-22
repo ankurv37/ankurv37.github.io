@@ -44,10 +44,11 @@
 }
 
 .chaos-icon {
-  font-size: 2.5rem;
-  color: #8a2be2;
+  font-size: 2.8rem;
+  color: #eede81c5; /* Matching gold color */
   margin-bottom: 0.5rem;
   animation: pulse 2s ease-in-out infinite;
+  text-shadow: 0 0 10px rgba(219, 207, 136, 0.5);
 }
 
 @keyframes pulse {
@@ -56,15 +57,14 @@
 }
 
 .chaos-header h3 {
-  margin: 0 0 0.5rem 0;
-  font-size: 2rem;
+  color: #e7da8c; /* Gold color for better contrast */
+  font-size: 1.8rem;
+  margin: 0.5rem 0;
   font-weight: 700;
-  background: linear-gradient(135deg, #8a2be2 0%, #ff4444 50%, #00ff95 100%);
-  background-size: 200% 200%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientText 3s ease-in-out infinite;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 @keyframes gradientText {
