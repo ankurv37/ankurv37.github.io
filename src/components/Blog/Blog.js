@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import './Blog.css';
 
 const BlogContainer = styled.div`
   padding: 2rem;
@@ -9,7 +9,11 @@ const BlogContainer = styled.div`
   margin: 0 auto;
 
   h1 {
-    color: #00ff95;
+    background: linear-gradient(135deg, #00ff95 0%, #00d4aa 50%, #0099cc 100%);
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     margin-bottom: 2rem;
     text-align: center;
   }
@@ -35,17 +39,22 @@ const BlogTitle = styled(motion.div)`
   }
 
   h2 {
-    color: #00ff95;
+    background: linear-gradient(135deg, #00ff95 0%, #00d4aa 50%, #0099cc 100%);
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     margin-bottom: 1rem;
   }
 
   p {
     line-height: 1.6;
     margin-bottom: 1rem;
+    color: #ffffff;
   }
 
   small {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.9);
   }
 
   .tags {
@@ -56,10 +65,13 @@ const BlogTitle = styled(motion.div)`
   }
 
   .tag {
-    background: rgba(0, 255, 149, 0.2);
     padding: 0.2rem 0.8rem;
     border-radius: 15px;
     font-size: 0.8rem;
+    border: 1px solid rgba(0, 255, 149, 0.5);
+    background: rgba(0, 255, 149, 0.1);
+    color: #00ff95;
+    font-weight: 500;
   }
 `;
 
@@ -71,22 +83,29 @@ const BlogContent = styled(motion.div)`
 
   .content {
     h3 {
-      color: #00ff95;
+      background: linear-gradient(135deg, #00ff95 0%, #00d4aa 50%, #0099cc 100%);
+      background-size: 200% 200%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       margin: 1.5rem 0 1rem;
     }
 
     p {
       line-height: 1.8;
       margin-bottom: 1rem;
+      color: #ffffff;
     }
 
     ul, ol {
       margin-left: 2rem;
       margin-bottom: 1rem;
+      color: #ffffff;
     }
 
     li {
       margin-bottom: 0.5rem;
+      color: #ffffff;
     }
 
     pre {
@@ -99,12 +118,31 @@ const BlogContent = styled(motion.div)`
   }
 `;
 
+const BackButton = styled.button`
+  background: rgba(0, 255, 149, 0.2);
+  border: 1px solid rgba(0, 255, 149, 0.4);
+  color: #00ff95;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: rgba(0, 255, 149, 0.3);
+    transform: translateX(-5px);
+  }
+`;
+
 const Blog = () => {
+  const location = useLocation();
   const [selectedBlog, setSelectedBlog] = useState(null);
 
   const blogPosts = [
     {
       id: 1,
+      slug: "react",
       title: "Getting Started with React",
       excerpt: "A comprehensive guide to React fundamentals and modern development practices",
       date: "2024-01-15",
@@ -156,6 +194,7 @@ const Blog = () => {
     },
     {
         id: 2,
+        slug: "kubernetes",
         title: "Kubernetes Fundamentals",
         excerpt: "Understanding the concepts of container orchestration with Kubernetes",
         date: "2024-02-01",
@@ -217,112 +256,106 @@ const Blog = () => {
         `,
         tags: ["Kubernetes", "DevOps", "Container Orchestration", "Cloud Native"]
       }
-    // Add more blog posts here
-];
+  ];
 
-// Update the BlogCard styling to accommodate the full content
-const BlogCard = styled(motion.div)`
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 15px;
-  padding: 2rem;
-  cursor: pointer;
-  transition: transform 0.3s ease;
+  // Check URL hash to determine which blog to show
+  useEffect(() => {
+    const hash = location.hash.replace('#', '');
+    if (hash) {
+      const post = blogPosts.find(p => p.slug === hash);
+      if (post) {
+        setSelectedBlog(post.id);
+      }
+    } else {
+      setSelectedBlog(null);
+    }
+  }, [location.hash]);
 
-  h2 {
-    color: #00ff95;
-    margin-bottom: 1rem;
+  // If a specific blog is selected, show only that blog
+  const selectedPost = blogPosts.find(p => p.id === selectedBlog);
+
+  if (selectedPost) {
+    return (
+      <BlogContainer>
+        <BackButton onClick={() => window.history.pushState({}, '', '/blog')}>
+          ← Back to All Posts
+        </BackButton>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h1>{selectedPost.title}</h1>
+          <small style={{ color: 'rgba(255, 255, 255, 0.7)', display: 'block', marginBottom: '2rem' }}>
+            {selectedPost.date} · {selectedPost.readTime}
+          </small>
+          <div className="tags" style={{ marginBottom: '2rem', display: 'flex', gap: '0.5rem' }}>
+            {selectedPost.tags.map((tag, i) => (
+              <span key={i} style={{ 
+                background: 'rgba(0, 255, 149, 0.2)', 
+                padding: '0.2rem 0.8rem', 
+                borderRadius: '15px', 
+                fontSize: '0.8rem' 
+              }}>{tag}</span>
+            ))}
+          </div>
+          <BlogContent
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <div className="content" 
+              dangerouslySetInnerHTML={{ 
+                __html: selectedPost.content
+                  .split('\n')
+                  .map(line => line.trim())
+                  .filter(line => line)
+                  .map(line => {
+                    if (line.startsWith('const') || line.startsWith('function')) {
+                      return `<pre><code>${line}</code></pre>`;
+                    }
+                    if (line.startsWith('-')) {
+                      return `<ul><li>${line.substring(1).trim()}</li></ul>`;
+                    }
+                    if (line.match(/^\d+\./)) {
+                      return `<ol><li>${line.substring(line.indexOf('.') + 1).trim()}</li></ol>`;
+                    }
+                    if (line.endsWith(':')) {
+                      return `<h3>${line}</h3>`;
+                    }
+                    return `<p>${line}</p>`;
+                  })
+                  .join('')
+              }}
+            />
+          </BlogContent>
+        </motion.div>
+      </BlogContainer>
+    );
   }
 
-  p {
-    line-height: 1.6;
-    margin-bottom: 1rem;
-  }
-
-  pre {
-    background: rgba(0, 0, 0, 0.2);
-    padding: 1rem;
-    border-radius: 8px;
-    margin: 1rem 0;
-    overflow-x: auto;
-  }
-
-  .content {
-    white-space: pre-line;
-    margin-top: 1.5rem;
-  }
-
-  .tags {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 1rem;
-  }
-
-  .tag {
-    background: rgba(0, 255, 149, 0.2);
-    padding: 0.2rem 0.8rem;
-    border-radius: 15px;
-    font-size: 0.8rem;
-  }
-`;
-
-// Update the return section to include the full content
-return (
+  // Show all blog posts
+  return (
     <BlogContainer>
       <h1>Blog Posts</h1>
       <BlogGrid>
         {blogPosts.map((post, index) => (
-          <div key={post.id}>
-            <BlogTitle
-              onClick={() => setSelectedBlog(selectedBlog === post.id ? null : post.id)}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <h2>{post.title}</h2>
-              <p>{post.excerpt}</p>
-              <small>{post.date} · {post.readTime}</small>
-              <div className="tags">
-                {post.tags.map((tag, i) => (
-                  <span key={i} className="tag">{tag}</span>
-                ))}
-              </div>
-            </BlogTitle>
-            
-            {selectedBlog === post.id && (
-              <BlogContent
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="content" 
-                  dangerouslySetInnerHTML={{ 
-                    __html: post.content
-                      .split('\n')
-                      .map(line => line.trim())
-                      .filter(line => line)
-                      .map(line => {
-                        if (line.startsWith('const') || line.startsWith('function')) {
-                          return `<pre><code>${line}</code></pre>`;
-                        }
-                        if (line.startsWith('-')) {
-                          return `<ul><li>${line.substring(1).trim()}</li></ul>`;
-                        }
-                        if (line.match(/^\d+\./)) {
-                          return `<ol><li>${line.substring(line.indexOf('.') + 1).trim()}</li></ol>`;
-                        }
-                        if (line.endsWith(':')) {
-                          return `<h3>${line}</h3>`;
-                        }
-                        return `<p>${line}</p>`;
-                      })
-                      .join('')
-                  }}
-                />
-              </BlogContent>
-            )}
-          </div>
+          <BlogTitle
+            key={post.id}
+            onClick={() => window.location.hash = post.slug}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+          >
+            <h2>{post.title}</h2>
+            <p>{post.excerpt}</p>
+            <small>{post.date} · {post.readTime}</small>
+            <div className="tags">
+              {post.tags.map((tag, i) => (
+                <span key={i} className="tag">{tag}</span>
+              ))}
+            </div>
+          </BlogTitle>
         ))}
       </BlogGrid>
     </BlogContainer>

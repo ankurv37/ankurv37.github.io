@@ -6,6 +6,14 @@
   margin-bottom: 2rem;
 }
 
+.skill-category h3 {
+  background: linear-gradient(135deg, #00ff95 0%, #00d4aa 50%, #0099cc 100%);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .skill-list {
   display: flex;
   flex-wrap: wrap;
@@ -18,4 +26,5 @@
   padding: 0.8rem;
   border-radius: 8px;
   text-align: center;
+  color: #ffffff;
 }

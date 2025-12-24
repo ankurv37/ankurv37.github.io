@@ -6,12 +6,20 @@
   transition: transform 0.3s ease;
 }
 
+.project-card p {
+  color: #ffffff;
+}
+
 .project-card:hover {
   transform: translateY(-5px);
 }
 
 .project-title {
-  color: #00ff95;
+  background: linear-gradient(135deg, #00ff95 0%, #00d4aa 50%, #0099cc 100%);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 1rem;
 }
 

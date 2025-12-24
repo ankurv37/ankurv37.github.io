@@ -6,17 +6,25 @@ const ExperienceSection = styled.div`
 `;
 
 const JobTitle = styled.h3`
-  color: #00ff95;
+  background: linear-gradient(135deg, #00ff95 0%, #00d4aa 50%, #0099cc 100%);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 0.5rem;
 `;
 
 const Company = styled.h4`
-  color: rgba(255, 255, 255, 0.8);
+  background: linear-gradient(135deg, #00ff95 0%, #00d4aa 50%, #0099cc 100%);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 0.5rem;
 `;
 
 const Duration = styled.p`
-  color: rgba(255, 255, 255, 0.6);
+  color: #ffffff;
   font-size: 0.9rem;
   margin-bottom: 1rem;
 `;

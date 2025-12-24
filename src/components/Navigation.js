@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaBlog, FaHome, FaProjectDiagram, FaFileAlt, FaBars, FaTimes } from 'react-icons/fa';
+import { FaBlog, FaHome, FaProjectDiagram, FaFileAlt, FaBars, FaTimes, FaCode } from 'react-icons/fa';
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import GoogleLoginButton from './GoogleLoginButton';
 
 const MobileMenuButton = styled.button`
@@ -36,8 +37,7 @@ const Nav = styled(motion.nav)`
   top: 0;
   left: 0;
   height: 100vh;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px);
+  background: #1a1a1a;
   border-right: 1px solid rgba(0, 255, 149, 0.2);
   padding: 2rem;
   display: flex;
@@ -46,17 +46,6 @@ const Nav = styled(motion.nav)`
   width: 220px;
   box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
   z-index: 1000;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(180deg, rgba(0, 255, 149, 0.05) 0%, transparent 50%, rgba(0, 212, 255, 0.05) 100%);
-    pointer-events: none;
-  }
   
   @media (max-width: 768px) {
     transform: translateX(${props => props.isOpen ? '0' : '-100%'});
@@ -84,7 +73,66 @@ const Overlay = styled(motion.div)`
 const NavLinks = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
+`;
+
+const Dropdown = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+`;
+
+const DropdownButton = styled.button`
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 1.1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  text-align: left;
+  
+  &:hover {
+    color: #00ff95;
+    background: rgba(0, 255, 149, 0.1);
+  }
+  
+  svg:first-child {
+    margin-right: 0.5rem;
+  }
+`;
+
+const DropdownContent = styled(motion.div)`
+  position: absolute;
+  left: 100%;
+  top: 0;
+  min-width: 200px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 255, 149, 0.2);
+  border-radius: 12px;
+  padding: 0.5rem;
+  margin-left: 1rem;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  
+  @media (max-width: 768px) {
+    position: relative;
+    left: 0;
+    margin-left: 1.5rem;
+    margin-top: 0.5rem;
+    border-left: 2px solid rgba(0, 255, 149, 0.3);
+    border-radius: 0;
+    background: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
+  }
 `;
 
 const StyledLink = styled(Link)`
@@ -133,9 +181,17 @@ const StyledLink = styled(Link)`
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
 
   const toggleMenu = () => setIsOpen(!isOpen);
-  const closeMenu = () => setIsOpen(false);
+  const closeMenu = () => {
+    setIsOpen(false);
+    setOpenDropdown(null);
+  };
+  
+  const toggleDropdown = (dropdown) => {
+    setOpenDropdown(openDropdown === dropdown ? null : dropdown);
+  };
 
   return (
     <>
@@ -166,15 +222,96 @@ const Navigation = () => {
           <motion.div whileHover={{ scale: 1.1 }}>
             <StyledLink to="/" onClick={closeMenu}><FaHome /> Home</StyledLink>
           </motion.div>
-          <motion.div whileHover={{ scale: 1.1 }}>
-            <StyledLink to="/blog" onClick={closeMenu}><FaBlog /> Blog</StyledLink>
-          </motion.div>
-          <motion.div whileHover={{ scale: 1.1 }}>
-            <StyledLink to="/projects" onClick={closeMenu}><FaProjectDiagram /> Projects</StyledLink>
-          </motion.div>
+          <Dropdown>
+            <motion.div whileHover={{ scale: 1.02 }}>
+              <DropdownButton onClick={() => toggleDropdown('blog')}>
+                <span><FaBlog /> Blog {openDropdown === 'blog' ? <FiChevronUp /> : <FiChevronDown />}</span>
+              </DropdownButton>
+            </motion.div>
+            <AnimatePresence>
+              {openDropdown === 'blog' && (
+                <DropdownContent
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ x: -20, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                >
+                  <motion.div whileHover={{ scale: 1.05 }}>
+                    <StyledLink to="/blog" onClick={closeMenu}>All Posts</StyledLink>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.05 }}>
+                    <StyledLink to="/blog#react" onClick={closeMenu}>React Guide</StyledLink>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.05 }}>
+                    <StyledLink to="/blog#kubernetes" onClick={closeMenu}>Kubernetes</StyledLink>
+                  </motion.div>
+                </DropdownContent>
+              )}
+            </AnimatePresence>
+          </Dropdown>
+          <Dropdown>
+            <motion.div whileHover={{ scale: 1.02 }}>
+              <DropdownButton onClick={() => toggleDropdown('projects')}>
+                <span><FaProjectDiagram /> Projects {openDropdown === 'projects' ? <FiChevronUp /> : <FiChevronDown />}</span>
+              </DropdownButton>
+            </motion.div>
+            <AnimatePresence>
+              {openDropdown === 'projects' && (
+                <DropdownContent
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ x: -20, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                >
+                  <motion.div whileHover={{ scale: 1.05 }}>
+                    <StyledLink to="/projects" onClick={closeMenu}>All Projects</StyledLink>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.05 }}>
+                    <StyledLink to="/projects#portfolio" onClick={closeMenu}>Portfolio</StyledLink>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.05 }}>
+                    <StyledLink to="/projects#wallstreetbets" onClick={closeMenu}>WallStreetBets</StyledLink>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.05 }}>
+                    <StyledLink to="/projects#applepie" onClick={closeMenu}>Apple Pie</StyledLink>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.05 }}>
+                    <StyledLink to="/projects#faceoff" onClick={closeMenu}>Face-Off</StyledLink>
+                  </motion.div>
+                </DropdownContent>
+              )}
+            </AnimatePresence>
+          </Dropdown>
           <motion.div whileHover={{ scale: 1.1 }}>
             <StyledLink to="/resume" onClick={closeMenu}><FaFileAlt /> Resume</StyledLink>
           </motion.div>
+          <Dropdown>
+            <motion.div whileHover={{ scale: 1.02 }}>
+              <DropdownButton onClick={() => toggleDropdown('recipes')}>
+                <span><FaCode /> Recipes {openDropdown === 'recipes' ? <FiChevronUp /> : <FiChevronDown />}</span>
+              </DropdownButton>
+            </motion.div>
+            <AnimatePresence>
+              {openDropdown === 'recipes' && (
+                <DropdownContent
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ x: -20, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                >
+                  <motion.div whileHover={{ scale: 1.05 }}>
+                    <StyledLink to="/github" onClick={closeMenu}>GitHub</StyledLink>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.05 }}>
+                    <StyledLink to="/chaos" onClick={closeMenu}>Chaos</StyledLink>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.05 }}>
+                    <StyledLink to="/pongwars" onClick={closeMenu}>PongWars</StyledLink>
+                  </motion.div>
+                </DropdownContent>
+              )}
+            </AnimatePresence>
+          </Dropdown>
         </NavLinks>
         <GoogleLoginButton />
       </Nav>

@@ -3,19 +3,23 @@
 }
 
 .school {
-  color: #00ff95;
+  background: linear-gradient(135deg, #00ff95 0%, #00d4aa 50%, #0099cc 100%);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 0.5rem;
   font-size: 1.3rem;
 }
 
 .degree {
-  color: rgba(255, 255, 255, 0.8);
+  color: #ffffff;
   margin-bottom: 0.5rem;
   font-size: 1.1rem;
 }
 
 .period {
-  color: rgba(255, 255, 255, 0.6);
+  color: #ffffff;
   font-size: 0.9rem;
   margin-bottom: 1rem;
 }
