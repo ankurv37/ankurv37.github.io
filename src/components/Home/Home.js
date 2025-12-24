@@ -4,6 +4,7 @@ import './Home.css';
 const Home = () => {
   return (
     <div className="home-container">
+      <img src={process.env.PUBLIC_URL + '/home.png'} alt="Welcome" className="home-image" />
       <h1 className="title">
         Hey, I'm Ankur
       </h1>
