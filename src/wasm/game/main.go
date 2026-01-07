@@ -2,13 +2,16 @@
 package main
 
 import (
+	"fmt"
 	"image/color"
 	"log"
 	"math/rand"
 	"time"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/text"
 	"github.com/hajimehoshi/ebiten/v2/vector"
+	"golang.org/x/image/font/basicfont"
 )
 
 // Constants for screen and grid configuration
@@ -45,8 +48,10 @@ type Ball struct {
 
 // Game struct holds the state of the simulation
 type Game struct {
-	Grid  [Cols][Rows]TileType
-	Balls []*Ball
+	Grid      [Cols][Rows]TileType
+	Balls     []*Ball
+	DayScore  int
+	NightScore int
 }
 
 // Update handles the logic (movement and collision)
@@ -105,8 +110,30 @@ func (g *Game) Update() error {
 	return nil
 }
 
+// CalculateScores counts the cells owned by each side
+func (g *Game) CalculateScores() {
+	dayCount := 0
+	nightCount := 0
+
+	for x := 0; x < Cols; x++ {
+		for y := 0; y < Rows; y++ {
+			if g.Grid[x][y] == TypeDay {
+				dayCount++
+			} else {
+				nightCount++
+			}
+		}
+	}
+
+	g.DayScore = dayCount
+	g.NightScore = nightCount
+}
+
 // Draw handles rendering the visuals
 func (g *Game) Draw(screen *ebiten.Image) {
+	// Calculate scores
+	g.CalculateScores()
+
 	// 1. Draw the Grid
 	for x := 0; x < Cols; x++ {
 		for y := 0; y < Rows; y++ {
@@ -129,6 +156,16 @@ func (g *Game) Draw(screen *ebiten.Image) {
 		// Draw ball slightly smaller than tile
 		vector.DrawFilledCircle(screen, float32(ball.X+TileSize/2), float32(ball.Y+TileSize/2), TileSize/3, ColorBall, true)
 	}
+
+	// 3. Draw the Scores
+	whiteScore := fmt.Sprintf("White: %d", g.DayScore)
+	darkScore := fmt.Sprintf("Dark: %d", g.NightScore)
+
+	// Draw white score on the left in black color
+	text.Draw(screen, whiteScore, basicfont.Face7x13, 10, 20, color.Black)
+
+	// Draw dark score on the right in white color
+	text.Draw(screen, darkScore, basicfont.Face7x13, ScreenWidth-120, 20, color.White)
 }
 
 // Layout defines the screen dimensions
@@ -153,26 +190,24 @@ func main() {
 	}
 
 	// Initialize Balls
-	// Create 5 balls for Day (Left side) and 5 for Night (Right side)
-	for i := 0; i < 5; i++ {
-		// Day Ball
-		game.Balls = append(game.Balls, &Ball{
-			X:    float64(ScreenWidth / 4),
-			Y:    float64(rand.Intn(ScreenHeight)),
-			DX:   float64(BallSpeed), // Move Right
-			DY:   float64(BallSpeed),
-			Type: TypeDay,
-		})
+	// Create 1 ball for Day (Left side) and 1 for Night (Right side)
+	// Day Ball
+	game.Balls = append(game.Balls, &Ball{
+		X:    float64(ScreenWidth / 4),
+		Y:    float64(rand.Intn(ScreenHeight)),
+		DX:   float64(BallSpeed), // Move Right
+		DY:   float64(BallSpeed),
+		Type: TypeDay,
+	})
 
-		// Night Ball
-		game.Balls = append(game.Balls, &Ball{
-			X:    float64(ScreenWidth * 3 / 4),
-			Y:    float64(rand.Intn(ScreenHeight)),
-			DX:   float64(-BallSpeed), // Move Left
-			DY:   float64(-BallSpeed),
-			Type: TypeNight,
-		})
-	}
+	// Night Ball
+	game.Balls = append(game.Balls, &Ball{
+		X:    float64(ScreenWidth * 3 / 4),
+		Y:    float64(rand.Intn(ScreenHeight)),
+		DX:   float64(-BallSpeed), // Move Left
+		DY:   float64(-BallSpeed),
+		Type: TypeNight,
+	})
 
 	ebiten.SetWindowSize(ScreenWidth, ScreenHeight)
 	ebiten.SetWindowTitle("Pong Wars - Go Edition")
