@@ -282,9 +282,6 @@ const Navigation = () => {
               )}
             </AnimatePresence>
           </Dropdown>
-          <motion.div whileHover={{ scale: 1.1 }}>
-            <StyledLink to="/resume" onClick={closeMenu}><FaFileAlt /> Resume</StyledLink>
-          </motion.div>
           <Dropdown>
             <motion.div whileHover={{ scale: 1.02 }}>
               <DropdownButton onClick={() => toggleDropdown('recipes')}>

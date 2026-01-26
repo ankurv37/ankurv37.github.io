@@ -33,7 +33,6 @@ const MainContent = () => {
         <Route path="/" element={<Home />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/projects" element={<Projects />} />
-        <Route path="/resume" element={<Resume />} />
         <Route path="/logic-gates" element={<LogicGateVisualizer />} />
         <Route path="/adder" element={<FullAdderVisualizer />} />
         <Route path="/github" element={<GitHubActivity />} />
