@@ -2,6 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import posts from '../../generated/posts.json';
+
+const GalaxyHeader = styled.div`
+  text-align: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+
+  .galaxy-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(196, 181, 253, 0.6);
+    margin-bottom: 0.5rem;
+  }
+`;
 
 const BlogContainer = styled.div`
   padding: 2rem;
@@ -9,13 +25,19 @@ const BlogContainer = styled.div`
   margin: 0 auto;
 
   h1 {
-    background: linear-gradient(135deg, #00ff95 0%, #00d4aa 50%, #0099cc 100%);
+    background: linear-gradient(135deg, #7c9bff 0%, #c4b5fd 50%, #fbbf24 100%);
     background-size: 200% 200%;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
     text-align: center;
+    animation: galaxyShimmer 4s ease-in-out infinite;
+  }
+
+  @keyframes galaxyShimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
 `;
 
@@ -27,19 +49,22 @@ const BlogGrid = styled.div`
 `;
 
 const BlogTitle = styled(motion.div)`
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(124, 155, 255, 0.04);
   backdrop-filter: blur(10px);
   border-radius: 15px;
   padding: 2rem;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(124, 155, 255, 0.08);
 
   &:hover {
     transform: translateY(-5px);
+    border-color: rgba(124, 155, 255, 0.2);
+    box-shadow: 0 8px 30px rgba(124, 155, 255, 0.1);
   }
 
   h2 {
-    background: linear-gradient(135deg, #00ff95 0%, #00d4aa 50%, #0099cc 100%);
+    background: linear-gradient(135deg, #7c9bff 0%, #c4b5fd 50%, #fbbf24 100%);
     background-size: 200% 200%;
     background-clip: text;
     -webkit-background-clip: text;
@@ -50,11 +75,11 @@ const BlogTitle = styled(motion.div)`
   p {
     line-height: 1.6;
     margin-bottom: 1rem;
-    color: #ffffff;
+    color: rgba(205, 214, 244, 0.85);
   }
 
   small {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(205, 214, 244, 0.6);
   }
 
   .tags {
@@ -65,25 +90,32 @@ const BlogTitle = styled(motion.div)`
   }
 
   .tag {
-    padding: 0.2rem 0.8rem;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    border: 1px solid rgba(0, 255, 149, 0.5);
-    background: rgba(0, 255, 149, 0.1);
-    color: #00ff95;
+    padding: 0.25rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    border: 1px solid rgba(196, 181, 253, 0.3);
+    background: rgba(196, 181, 253, 0.08);
+    color: #c4b5fd;
     font-weight: 500;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(196, 181, 253, 0.15);
+      box-shadow: 0 0 8px rgba(196, 181, 253, 0.2);
+    }
   }
 `;
 
 const BlogContent = styled(motion.div)`
   margin-top: 1rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(124, 155, 255, 0.03);
   border-radius: 15px;
   padding: 2rem;
+  border: 1px solid rgba(124, 155, 255, 0.06);
 
   .content {
-    h3 {
-      background: linear-gradient(135deg, #00ff95 0%, #00d4aa 50%, #0099cc 100%);
+    h2, h3 {
+      background: linear-gradient(135deg, #7c9bff 0%, #c4b5fd 100%);
       background-size: 200% 200%;
       background-clip: text;
       -webkit-background-clip: text;
@@ -94,34 +126,44 @@ const BlogContent = styled(motion.div)`
     p {
       line-height: 1.8;
       margin-bottom: 1rem;
-      color: #ffffff;
+      color: rgba(205, 214, 244, 0.85);
     }
 
     ul, ol {
       margin-left: 2rem;
       margin-bottom: 1rem;
-      color: #ffffff;
+      color: rgba(205, 214, 244, 0.85);
     }
 
     li {
       margin-bottom: 0.5rem;
-      color: #ffffff;
+      color: rgba(205, 214, 244, 0.85);
     }
 
     pre {
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.3);
       padding: 1rem;
       border-radius: 8px;
       margin: 1rem 0;
       overflow-x: auto;
+      border: 1px solid rgba(124, 155, 255, 0.08);
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9em;
+    }
+
+    strong {
+      color: #c4b5fd;
     }
   }
 `;
 
 const BackButton = styled.button`
-  background: rgba(0, 255, 149, 0.2);
-  border: 1px solid rgba(0, 255, 149, 0.4);
-  color: #00ff95;
+  background: rgba(124, 155, 255, 0.1);
+  border: 1px solid rgba(124, 155, 255, 0.3);
+  color: #7c9bff;
   padding: 0.8rem 1.5rem;
   border-radius: 8px;
   cursor: pointer;
@@ -130,8 +172,9 @@ const BackButton = styled.button`
   transition: all 0.3s ease;
   
   &:hover {
-    background: rgba(0, 255, 149, 0.3);
+    background: rgba(124, 155, 255, 0.2);
     transform: translateX(-5px);
+    box-shadow: 0 0 15px rgba(124, 155, 255, 0.15);
   }
 `;
 
@@ -139,132 +182,13 @@ const Blog = () => {
   const location = useLocation();
   const [selectedBlog, setSelectedBlog] = useState(null);
 
-  const blogPosts = [
-    {
-      id: 1,
-      slug: "react",
-      title: "Getting Started with React",
-      excerpt: "A comprehensive guide to React fundamentals and modern development practices",
-      date: "2024-01-15",
-      readTime: "5 min read",
-      content: `
-        React has revolutionized the way we build web applications. As a frontend library developed by Facebook, 
-        it introduces a component-based architecture that makes UI development more intuitive and maintainable.
-
-        Key Concepts to Understand:
-        
-        1. Components
-        Components are the building blocks of React applications. They're like LEGO pieces that you can combine 
-        to create complex UIs. Components can be either function-based or class-based, though modern React 
-        favors function components with hooks.
-
-        2. JSX
-        JSX is React's syntax extension for JavaScript. It allows you to write HTML-like code directly in your 
-        JavaScript files. For example:
-        
-        const Welcome = () => { return Hello, React! ;}
-
-        3. State and Props
-        State manages data within a component, while props pass data between components. The introduction of 
-        hooks like useState has made state management more straightforward in function components.
-
-        4. Virtual DOM
-        React's Virtual DOM optimizes rendering by minimizing direct manipulation of the actual DOM, resulting 
-        in better performance.
-
-        Getting Started:
-        1. Set up your development environment with Node.js
-        2. Create a new React project using Create React App:
-           npx create-react-app my-app
-        3. Start exploring components and JSX
-        4. Learn about hooks (useState, useEffect)
-        5. Practice by building small projects
-
-        Best Practices:
-        - Keep components small and focused
-        - Use meaningful component names
-        - Implement proper state management
-        - Follow the React component lifecycle
-        - Use functional components with hooks
-        
-        React's ecosystem is vast, but starting with these fundamentals will set you on the right path for 
-        modern web development.
-      `,
-      tags: ["React", "JavaScript", "Web Development", "Frontend"]
-    },
-    {
-        id: 2,
-        slug: "kubernetes",
-        title: "Kubernetes Fundamentals",
-        excerpt: "Understanding the concepts of container orchestration with Kubernetes",
-        date: "2024-02-01",
-        readTime: "8 min read",
-        content: `
-          Kubernetes has become the de facto standard for container orchestration. Let's explore its fundamental concepts 
-          and architecture that make it so powerful for modern cloud-native applications.
-  
-          Core Concepts:
-  
-          1. Pods
-          The smallest deployable unit in Kubernetes. A pod can contain one or more containers that share the same network 
-          namespace and storage. Think of it as a logical host for your containers.
-  
-          2. Deployments
-          Manages the desired state of your pods. It ensures a specified number of pod replicas are running at any time, 
-          enabling zero-downtime updates and rollbacks.
-  
-          3. Services
-          Provides stable networking for pods. Types include:
-          - ClusterIP: Internal access only
-          - NodePort: Exposes port on each node
-          - LoadBalancer: Uses cloud provider's load balancer
-          - ExternalName: DNS CNAME record
-  
-          4. ConfigMaps & Secrets
-          Store configuration and sensitive data separately from your application code:
-          - ConfigMaps for general configuration
-          - Secrets for sensitive data (encrypted at rest)
-  
-          Key Components:
-  
-          1. Control Plane
-          - API Server: Central management point
-          - etcd: Distributed key-value store
-          - Scheduler: Places pods on nodes
-          - Controller Manager: Maintains desired state
-  
-          2. Worker Nodes
-          - kubelet: Node agent
-          - kube-proxy: Network proxy
-          - Container Runtime: Docker/containerd
-  
-          Best Practices:
-          - Use namespace for resource isolation
-          - Implement resource limits
-          - Configure health checks
-          - Use labels and selectors effectively
-          - Implement proper security policies
-  
-          Getting Started:
-          1. Install kubectl and minikube
-          2. Create your first deployment
-          3. Expose services
-          4. Learn about scaling and updates
-          5. Explore monitoring and logging
-  
-          Understanding these fundamentals is crucial for building resilient, scalable applications in Kubernetes.
-        `,
-        tags: ["Kubernetes", "DevOps", "Container Orchestration", "Cloud Native"]
-      }
-  ];
-
   // Check URL hash to determine which blog to show
   useEffect(() => {
     const hash = location.hash.replace('#', '');
     if (hash) {
-      const post = blogPosts.find(p => p.slug === hash);
+      const post = posts.find(p => p.slug === hash);
       if (post) {
-        setSelectedBlog(post.id);
+        setSelectedBlog(post.slug);
       }
     } else {
       setSelectedBlog(null);
@@ -272,7 +196,7 @@ const Blog = () => {
   }, [location.hash]);
 
   // If a specific blog is selected, show only that blog
-  const selectedPost = blogPosts.find(p => p.id === selectedBlog);
+  const selectedPost = posts.find(p => p.slug === selectedBlog);
 
   if (selectedPost) {
     return (
@@ -286,16 +210,18 @@ const Blog = () => {
           transition={{ duration: 0.5 }}
         >
           <h1>{selectedPost.title}</h1>
-          <small style={{ color: 'rgba(255, 255, 255, 0.7)', display: 'block', marginBottom: '2rem' }}>
+          <small style={{ color: 'rgba(205, 214, 244, 0.5)', display: 'block', marginBottom: '2rem' }}>
             {selectedPost.date} · {selectedPost.readTime}
           </small>
           <div className="tags" style={{ marginBottom: '2rem', display: 'flex', gap: '0.5rem' }}>
             {selectedPost.tags.map((tag, i) => (
               <span key={i} style={{ 
-                background: 'rgba(0, 255, 149, 0.2)', 
-                padding: '0.2rem 0.8rem', 
-                borderRadius: '15px', 
-                fontSize: '0.8rem' 
+                background: 'rgba(196, 181, 253, 0.08)', 
+                border: '1px solid rgba(196, 181, 253, 0.3)',
+                padding: '0.25rem 0.8rem', 
+                borderRadius: '20px', 
+                fontSize: '0.75rem',
+                color: '#c4b5fd'
               }}>{tag}</span>
             ))}
           </div>
@@ -305,28 +231,7 @@ const Blog = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <div className="content" 
-              dangerouslySetInnerHTML={{ 
-                __html: selectedPost.content
-                  .split('\n')
-                  .map(line => line.trim())
-                  .filter(line => line)
-                  .map(line => {
-                    if (line.startsWith('const') || line.startsWith('function')) {
-                      return `<pre><code>${line}</code></pre>`;
-                    }
-                    if (line.startsWith('-')) {
-                      return `<ul><li>${line.substring(1).trim()}</li></ul>`;
-                    }
-                    if (line.match(/^\d+\./)) {
-                      return `<ol><li>${line.substring(line.indexOf('.') + 1).trim()}</li></ol>`;
-                    }
-                    if (line.endsWith(':')) {
-                      return `<h3>${line}</h3>`;
-                    }
-                    return `<p>${line}</p>`;
-                  })
-                  .join('')
-              }}
+              dangerouslySetInnerHTML={{ __html: selectedPost.contentHtml }}
             />
           </BlogContent>
         </motion.div>
@@ -337,11 +242,14 @@ const Blog = () => {
   // Show all blog posts
   return (
     <BlogContainer>
-      <h1>Blog Posts</h1>
+      <GalaxyHeader>
+        <div className="galaxy-label">Writing</div>
+        <h1>Blog</h1>
+      </GalaxyHeader>
       <BlogGrid>
-        {blogPosts.map((post, index) => (
+        {posts.map((post, index) => (
           <BlogTitle
-            key={post.id}
+            key={post.slug}
             onClick={() => window.location.hash = post.slug}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -359,7 +267,7 @@ const Blog = () => {
         ))}
       </BlogGrid>
     </BlogContainer>
-);
+  );
 };
 
 export default Blog;

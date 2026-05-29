@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import MissionBanner from './MissionBanner';
 
 // Simple SVG gate component
 const Gate = ({ type, x, y, active }) => {
@@ -52,6 +53,12 @@ const LogicGateVisualizer = () => {
   ];
 
   return (
+    <>
+    <MissionBanner
+      title="Logic Gates"
+      description="Interactive SVG visualizer for binary arithmetic (ADD/SUB) powered by a Go→WASM backend with step-by-step gate animation."
+      tech={['Go', 'WebAssembly', 'SVG', 'Digital Logic']}
+    />
     <div style={{ textAlign: 'center' }}>
       <h2>Logic Gate Visualizer</h2>
       <div>
@@ -85,6 +92,7 @@ const LogicGateVisualizer = () => {
         Step: {step < 3 ? step + 1 : 'Done'}
       </div>
     </div>
+    </>
   );
 };
 

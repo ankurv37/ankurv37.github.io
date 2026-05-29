@@ -10,6 +10,7 @@ import {
   FaPause,
   FaRedo
 } from 'react-icons/fa';
+import MissionBanner from './MissionBanner';
 import './ChaosDemo.css';
 
 const ChaosDemo = () => {
@@ -176,6 +177,12 @@ const ChaosDemo = () => {
   }
 
   return (
+    <>
+    <MissionBanner
+      title="Chaos Engine"
+      description="WASM-powered chaos engineering simulator. Injects faults — network partitions, CPU spikes, node crashes, memory leaks — into a virtual cluster."
+      tech={['Go', 'WebAssembly', 'Chaos Engineering']}
+    />
     <motion.div 
       className="chaos-demo-container"
       initial={{ opacity: 0, y: 20 }}
@@ -337,6 +344,7 @@ const ChaosDemo = () => {
         </motion.div>
       )}
     </motion.div>
+    </>
   );
 };
 

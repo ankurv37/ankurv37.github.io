@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaCode, FaCalendarAlt } from 'react-icons/fa';
 import { useWasm } from '../hooks/useWasm';
+import MissionBanner from './MissionBanner';
 import './GitHubActivity.css';
 
 const GitHubActivity = ({ username = 'ankurv37' }) => {
@@ -163,6 +164,12 @@ const GitHubActivity = ({ username = 'ankurv37' }) => {
   }
 
   return (
+    <>
+    <MissionBanner
+      title="GitHub Pulse"
+      description="Real-time GitHub event stream processed via Go→WebAssembly. Visualizes commit frequency across public repos."
+      tech={['Go', 'WebAssembly', 'GitHub API', 'Canvas']}
+    />
     <motion.div 
       className="github-activity-container"
       initial={{ opacity: 0, y: 20 }}
@@ -217,6 +224,7 @@ const GitHubActivity = ({ username = 'ankurv37' }) => {
         {renderSimpleChart()}
       </motion.div>
     </motion.div>
+    </>
   );
 };
 

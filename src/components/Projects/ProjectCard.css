@@ -1,21 +1,24 @@
 .project-card {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(124, 155, 255, 0.04);
   backdrop-filter: blur(10px);
   border-radius: 15px;
   padding: 1.5rem;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(124, 155, 255, 0.08);
 }
 
 .project-card p {
-  color: #ffffff;
+  color: rgba(205, 214, 244, 0.85);
 }
 
 .project-card:hover {
   transform: translateY(-5px);
+  border-color: rgba(124, 155, 255, 0.2);
+  box-shadow: 0 8px 30px rgba(124, 155, 255, 0.1);
 }
 
 .project-title {
-  background: linear-gradient(135deg, #00ff95 0%, #00d4aa 50%, #0099cc 100%);
+  background: linear-gradient(135deg, #7c9bff 0%, #c4b5fd 50%, #fbbf24 100%);
   background-size: 200% 200%;
   background-clip: text;
   -webkit-background-clip: text;

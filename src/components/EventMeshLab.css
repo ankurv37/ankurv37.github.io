@@ -1,0 +1,265 @@
+.event-mesh-lab {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mesh-header-card,
+.mesh-control-panel,
+.mesh-toggle-grid,
+.mesh-system-grid,
+.mesh-log-card {
+  background: rgba(124, 155, 255, 0.05);
+  border: 1px solid rgba(124, 155, 255, 0.12);
+  border-radius: 22px;
+  backdrop-filter: blur(14px);
+}
+
+.mesh-header-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(260px, 1fr);
+  gap: 1.4rem;
+  padding: 1.9rem;
+}
+
+.mesh-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(251, 191, 36, 0.8);
+}
+
+.mesh-header-copy h2 {
+  margin: 0.4rem 0 0.8rem;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1.1;
+  color: #f8fbff;
+}
+
+.mesh-header-copy p,
+.mesh-ingress-card p,
+.consumer-card p,
+.mesh-log-list li {
+  color: rgba(205, 214, 244, 0.78);
+  line-height: 1.6;
+}
+
+.mesh-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.mesh-metric-card {
+  padding: 1.1rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(124, 155, 255, 0.12);
+}
+
+.mesh-metric-card span,
+.mesh-outcome-card span {
+  display: block;
+  font-size: 0.85rem;
+  color: rgba(205, 214, 244, 0.68);
+}
+
+.mesh-metric-card strong,
+.mesh-outcome-card strong {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 1.9rem;
+  color: #ffffff;
+}
+
+.mesh-control-panel {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 1.2rem;
+}
+
+.mesh-control-group {
+  display: grid;
+  gap: 0.45rem;
+  color: rgba(205, 214, 244, 0.78);
+}
+
+.mesh-control-group label {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.mesh-control-group input[type='range'] {
+  width: 100%;
+}
+
+.mesh-action-button,
+.mesh-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  border-radius: 14px;
+  border: 1px solid rgba(124, 155, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  color: #f8fbff;
+  padding: 0.85rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.mesh-action-button:hover,
+.mesh-toggle:hover {
+  transform: translateY(-1px);
+  background: rgba(124, 155, 255, 0.12);
+}
+
+.mesh-action-button.secondary {
+  color: #d7e2ff;
+}
+
+.mesh-toggle-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+  padding: 1rem;
+}
+
+.mesh-toggle.active {
+  background: linear-gradient(135deg, rgba(124, 155, 255, 0.24), rgba(196, 181, 253, 0.12));
+  border-color: rgba(124, 155, 255, 0.28);
+}
+
+.mesh-system-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 1.2rem;
+}
+
+.mesh-column {
+  min-width: 0;
+}
+
+.mesh-column-header {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 0.8rem;
+  color: #f8fbff;
+}
+
+.mesh-column-header h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.mesh-ingress-card,
+.partition-card,
+.consumer-card,
+.mesh-outcome-card,
+.mesh-log-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(124, 155, 255, 0.12);
+}
+
+.mesh-ingress-card,
+.partition-card,
+.consumer-card,
+.mesh-outcome-card {
+  border-radius: 18px;
+  padding: 1rem;
+}
+
+.mesh-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.partition-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.7rem;
+  color: #ffffff;
+  margin-bottom: 0.55rem;
+  font-size: 0.9rem;
+}
+
+.partition-card small,
+.consumer-card small {
+  color: rgba(205, 214, 244, 0.62);
+}
+
+.partition-bar {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  margin-bottom: 0.55rem;
+}
+
+.partition-bar-fill {
+  height: 100%;
+  background: linear-gradient(135deg, #7c9bff, #fbbf24);
+}
+
+.consumer-card.healthy {
+  border-color: rgba(34, 197, 94, 0.24);
+}
+
+.consumer-card.lagging,
+.consumer-card.throttled {
+  border-color: rgba(251, 191, 36, 0.26);
+}
+
+.mesh-outcome-card {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.mesh-log-card {
+  padding: 1.2rem;
+  border-radius: 22px;
+}
+
+.mesh-log-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.6rem;
+}
+
+@media (max-width: 1080px) {
+  .mesh-header-card,
+  .mesh-system-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .mesh-control-panel,
+  .mesh-toggle-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .mesh-header-card,
+  .mesh-system-grid,
+  .mesh-control-panel,
+  .mesh-toggle-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mesh-header-card,
+  .mesh-control-panel,
+  .mesh-toggle-grid,
+  .mesh-system-grid,
+  .mesh-log-card {
+    padding: 1rem;
+  }
+}

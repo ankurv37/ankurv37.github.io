@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import MissionBanner from './MissionBanner';
 
 // SVG gate component
 const Gate = ({ type, x, y, active }) => {
@@ -88,6 +89,12 @@ const FullAdderVisualizer = () => {
   ];
 
   return (
+    <>
+    <MissionBanner
+      title="Full Adder"
+      description="Animated full-adder circuit — XOR, AND, OR gates — driven by WASM. Visualizes carry propagation through each logic stage."
+      tech={['Go', 'WebAssembly', 'SVG', 'Circuit Design']}
+    />
     <div style={{ textAlign: 'center' }}>
       <h2>Full Adder Circuit Visualizer</h2>
       <div style={{ marginBottom: 20 }}>
@@ -130,6 +137,7 @@ const FullAdderVisualizer = () => {
         Step: {step < 5 ? step + 1 : 'Done'}
       </div>
     </div>
+    </>
   );
 };
 

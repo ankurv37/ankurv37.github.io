@@ -18,8 +18,10 @@
   "scripts": {
     "predeploy": "npm run setup:wasm && npm run build",
     "deploy": "gh-pages -d build",
+    "build:posts": "node scripts/build-posts.js",
+    "prestart": "npm run build:posts",
     "start": "react-scripts start",
-    "build": "npm run build:wasm && npm run build:chaos && react-scripts build",
+    "build": "npm run build:posts && npm run build:wasm && npm run build:chaos && react-scripts build",
     "build:wasm": "GOOS=js GOARCH=wasm go build -o public/main.wasm main.go",
     "build:chaos": "GOOS=js GOARCH=wasm go build -o public/chaos.wasm chaos.go",
     "copy:wasm": "echo wasm_exec.js already in public/",
@@ -40,6 +42,8 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^6.3.0"
+    "gh-pages": "^6.3.0",
+    "gray-matter": "^4.0.3",
+    "marked": "^18.0.4"
   }
 }

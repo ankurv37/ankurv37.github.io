@@ -17,12 +17,17 @@ const ProfileImage = styled.img`
   height: 32px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #00ff95;
+  border: 2px solid rgba(251, 191, 36, 0.4);
 `;
 
 const UserName = styled.span`
   font-size: 0.9rem;
   color: white;
+`;
+
+const CompactContainer = styled.div`
+  transform: scale(0.85);
+  transform-origin: center;
 `;
 
 const GoogleLoginButton = () => {
@@ -31,7 +36,6 @@ const GoogleLoginButton = () => {
   const handleSuccess = (credentialResponse) => {
     const decoded = jwtDecode(credentialResponse.credential);
     setUser(decoded);
-    console.log('Login Success:', decoded);
   };
 
   return (
@@ -46,12 +50,15 @@ const GoogleLoginButton = () => {
           <UserName>{user.name}</UserName>
         </UserContainer>
       ) : (
-        <GoogleLogin
-          onSuccess={handleSuccess}
-          onError={() => console.log('Login Failed')}
-          theme="filled_black"
-          shape="pill"
-        />
+        <CompactContainer>
+          <GoogleLogin
+            onSuccess={handleSuccess}
+            onError={() => {}}
+            theme="filled_black"
+            shape="pill"
+            size="small"
+          />
+        </CompactContainer>
       )}
     </div>
   );

@@ -5,10 +5,38 @@ import styled from 'styled-components';
 import ProjectCard from './ProjectCard';
 import './ProjectList.css';
 
+const GalaxyHeader = styled.div`
+  text-align: center;
+  margin-bottom: 2.5rem;
+
+  .galaxy-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(251, 191, 36, 0.6);
+    margin-bottom: 0.5rem;
+  }
+
+  h1 {
+    background: linear-gradient(135deg, #7c9bff 0%, #c4b5fd 50%, #fbbf24 100%);
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: galaxyShimmer 4s ease-in-out infinite;
+  }
+
+  @keyframes galaxyShimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+`;
+
 const BackButton = styled.button`
-  background: rgba(0, 255, 149, 0.2);
-  border: 1px solid rgba(0, 255, 149, 0.4);
-  color: #00ff95;
+  background: rgba(124, 155, 255, 0.1);
+  border: 1px solid rgba(124, 155, 255, 0.3);
+  color: #7c9bff;
   padding: 0.8rem 1.5rem;
   border-radius: 8px;
   cursor: pointer;
@@ -17,8 +45,9 @@ const BackButton = styled.button`
   transition: all 0.3s ease;
   
   &:hover {
-    background: rgba(0, 255, 149, 0.3);
+    background: rgba(124, 155, 255, 0.2);
     transform: translateX(-5px);
+    box-shadow: 0 0 15px rgba(124, 155, 255, 0.15);
   }
 `;
 
@@ -28,7 +57,7 @@ const ProjectDetail = styled.div`
   padding: 2rem;
   
   h1 {
-    background: linear-gradient(135deg, #00ff95 0%, #00d4aa 50%, #0099cc 100%);
+    background: linear-gradient(135deg, #7c9bff 0%, #c4b5fd 50%, #fbbf24 100%);
     background-size: 200% 200%;
     background-clip: text;
     -webkit-background-clip: text;
@@ -40,14 +69,14 @@ const ProjectDetail = styled.div`
     font-size: 1.2rem;
     line-height: 1.8;
     margin-bottom: 2rem;
-    color: #ffffff;
+    color: rgba(205, 214, 244, 0.85);
   }
   
   .tech-stack {
     margin-bottom: 2rem;
     
     h3 {
-      background: linear-gradient(135deg, #00ff95 0%, #00d4aa 50%, #0099cc 100%);
+      background: linear-gradient(135deg, #7c9bff 0%, #c4b5fd 100%);
       background-size: 200% 200%;
       background-clip: text;
       -webkit-background-clip: text;
@@ -62,11 +91,12 @@ const ProjectDetail = styled.div`
     }
     
     .tech-tag {
-      background: rgba(0, 255, 149, 0.2);
+      background: rgba(196, 181, 253, 0.1);
+      border: 1px solid rgba(196, 181, 253, 0.25);
       padding: 0.5rem 1rem;
       border-radius: 20px;
-      font-size: 0.9rem;
-      color: #ffffff;
+      font-size: 0.85rem;
+      color: #c4b5fd;
     }
   }
   
@@ -79,16 +109,17 @@ const ProjectDetail = styled.div`
       align-items: center;
       gap: 0.5rem;
       padding: 0.8rem 1.5rem;
-      background: rgba(0, 255, 149, 0.2);
-      border: 1px solid rgba(0, 255, 149, 0.4);
+      background: rgba(124, 155, 255, 0.1);
+      border: 1px solid rgba(124, 155, 255, 0.3);
       border-radius: 8px;
-      color: #00ff95;
+      color: #7c9bff;
       text-decoration: none;
       transition: all 0.3s ease;
       
       &:hover {
-        background: rgba(0, 255, 149, 0.3);
+        background: rgba(124, 155, 255, 0.2);
         transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(124, 155, 255, 0.15);
       }
     }
   }
@@ -192,6 +223,10 @@ const ProjectList = () => {
   // Show all projects
   return (
     <div className="projects-container">
+      <GalaxyHeader>
+        <div className="galaxy-label">✦ Deep Space — Expeditions ✦</div>
+        <h1>Deep Space</h1>
+      </GalaxyHeader>
       {projects.map((project, index) => (
         <motion.div
           key={project.id}

@@ -8,7 +8,7 @@
 .resume-container h2 {
   font-size: 1.4rem;
   margin-bottom: 1.2rem;
-  background: linear-gradient(135deg, #00ff95 0%, #00d4aa 50%, #0099cc 100%);
+  background: linear-gradient(135deg, #7c9bff 0%, #c4b5fd 50%, #fbbf24 100%);
   background-size: 200% 200%;
   background-clip: text;
   -webkit-background-clip: text;
@@ -17,7 +17,7 @@
 
 .resume-container h3 {
   font-size: 1.2rem;
-  background: linear-gradient(135deg, #00ff95 0%, #00d4aa 50%, #0099cc 100%);
+  background: linear-gradient(135deg, #7c9bff 0%, #c4b5fd 50%, #fbbf24 100%);
   background-size: 200% 200%;
   background-clip: text;
   -webkit-background-clip: text;
@@ -26,7 +26,7 @@
 
 .resume-container h4 {
   font-size: 1rem;
-  background: linear-gradient(135deg, #00ff95 0%, #00d4aa 50%, #0099cc 100%);
+  background: linear-gradient(135deg, #7c9bff 0%, #c4b5fd 50%, #fbbf24 100%);
   background-size: 200% 200%;
   background-clip: text;
   -webkit-background-clip: text;
@@ -37,7 +37,7 @@
 .resume-container li {
   font-size: 0.9rem;
   line-height: 1.4;
-  color: #ffffff;
+  color: rgba(205, 214, 244, 0.85);
 }
 
 .resume-container ul {
