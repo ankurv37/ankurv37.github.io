@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  max-width: 1150px;
+  max-width: 1050px;
   margin: 0 auto;
 }
 
@@ -11,24 +11,25 @@
 .now-timeline,
 .now-connect,
 .now-focus-panel {
-  background: rgba(124, 155, 255, 0.05);
-  border: 1px solid rgba(124, 155, 255, 0.12);
-  border-radius: 24px;
-  backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
 }
 
 .now-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.7fr) minmax(280px, 1fr);
+  grid-template-columns: minmax(0, 1.7fr) minmax(260px, 1fr);
   gap: 1.5rem;
   padding: 2rem;
 }
 
 .now-hero-copy h1 {
   margin: 0.35rem 0 0.85rem;
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  line-height: 1.08;
-  color: #f8fbff;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: #e8ecf4;
+  letter-spacing: -0.01em;
 }
 
 .now-hero-copy p,
@@ -36,16 +37,18 @@
 .now-card li,
 .ship-card p,
 .contact-card p {
-  color: rgba(205, 214, 244, 0.8);
-  line-height: 1.65;
+  color: rgba(184, 192, 212, 0.75);
+  line-height: 1.6;
+  font-size: 0.92rem;
 }
 
 .now-eyebrow {
   display: inline-block;
-  font-size: 0.76rem;
-  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(251, 191, 36, 0.78);
+  color: rgba(160, 175, 210, 0.65);
 }
 
 .now-meta-row {
@@ -53,8 +56,8 @@
   flex-wrap: wrap;
   gap: 0.9rem;
   margin: 1rem 0 1.3rem;
-  color: rgba(205, 214, 244, 0.72);
-  font-size: 0.9rem;
+  color: rgba(184, 192, 212, 0.6);
+  font-size: 0.85rem;
 }
 
 .now-meta-row span {
@@ -66,37 +69,38 @@
 .now-hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.85rem;
+  gap: 0.75rem;
 }
 
 .now-primary-link,
 .now-secondary-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.4rem;
   text-decoration: none;
-  border-radius: 999px;
-  padding: 0.8rem 1.25rem;
-  font-weight: 600;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  border-radius: 8px;
+  padding: 0.7rem 1.1rem;
+  font-weight: 500;
+  font-size: 0.88rem;
+  transition: opacity 0.15s ease, transform 0.15s ease;
 }
 
 .now-primary-link {
-  background: linear-gradient(135deg, #fbbf24, #f59e0b);
-  color: #05060f;
+  background: #e8ecf4;
+  color: #0a0c14;
 }
 
 .now-secondary-link {
   background: rgba(255, 255, 255, 0.04);
-  color: #e5eeff;
-  border: 1px solid rgba(124, 155, 255, 0.14);
+  color: #c5cde0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .now-primary-link:hover,
 .now-secondary-link:hover,
 .ship-card:hover,
 .contact-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .now-focus-panel {
@@ -106,8 +110,10 @@
 .now-focus-panel h2,
 .now-card h2,
 .now-section-heading h2 {
-  margin: 0 0 0.95rem;
-  color: #f8fbff;
+  margin: 0 0 0.8rem;
+  color: #dce1ed;
+  font-weight: 600;
+  font-size: 1.1rem;
 }
 
 .now-focus-panel ul,
@@ -116,52 +122,58 @@
   padding-left: 1.1rem;
 }
 
+.now-focus-panel li,
+.now-card li {
+  margin-bottom: 0.4rem;
+}
+
 .now-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.35rem;
+  gap: 1.2rem;
 }
 
 .now-card {
-  padding: 1.6rem;
+  padding: 1.5rem;
 }
 
 .now-section-heading {
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
 }
 
 .now-timeline,
 .now-connect {
-  padding: 1.8rem;
+  padding: 1.6rem;
 }
 
 .now-ship-list,
 .now-contact-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.8rem;
 }
 
 .ship-card,
 .contact-card {
   text-decoration: none;
-  border-radius: 18px;
-  padding: 1.2rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(124, 155, 255, 0.12);
-  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  border-radius: 12px;
+  padding: 1.1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: transform 0.15s ease, border-color 0.2s ease;
 }
 
 .ship-card:hover,
 .contact-card:hover {
-  border-color: rgba(124, 155, 255, 0.24);
-  background: rgba(124, 155, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .ship-card h3,
 .contact-card h3 {
-  margin: 0 0 0.55rem;
-  color: #f8fbff;
+  margin: 0 0 0.45rem;
+  color: #dce1ed;
+  font-weight: 600;
+  font-size: 0.95rem;
 }
 
 .ship-card span,
@@ -169,27 +181,28 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  margin-top: 0.8rem;
-  color: #fbbf24;
-  font-weight: 600;
+  margin-top: 0.6rem;
+  color: rgba(160, 175, 210, 0.75);
+  font-weight: 500;
+  font-size: 0.82rem;
 }
 
 .contact-card {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 0.9rem;
+  gap: 0.8rem;
 }
 
 .contact-card-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 2.4rem;
+  height: 2.4rem;
   border-radius: 50%;
-  background: rgba(124, 155, 255, 0.12);
-  color: #c4b5fd;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(184, 192, 212, 0.7);
 }
 
 @media (max-width: 960px) {
@@ -207,7 +220,7 @@
   .now-card,
   .now-timeline,
   .now-connect {
-    padding: 1.35rem;
+    padding: 1.2rem;
   }
 
   .now-contact-grid,

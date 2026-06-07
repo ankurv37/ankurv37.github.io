@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaArrowRight, FaCompass, FaFileAlt, FaRocket } from 'react-icons/fa';
+import { FaArrowRight, FaCompass, FaFileAlt } from 'react-icons/fa';
 import { featuredPosts, featuredProjects, heroContent } from '../../content/siteContent';
 import './Home.css';
 
@@ -38,12 +38,6 @@ const Home = () => {
               <FaCompass /> Now
             </Link>
           </div>
-
-          <div className="recruiter-note-card">
-            {heroContent.recruiterNotes.map((note) => (
-              <p key={note}>{note}</p>
-            ))}
-          </div>
         </motion.div>
 
         <motion.div
@@ -52,34 +46,17 @@ const Home = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.08 }}
         >
-          <div className="sun-system">
-            <div className="corona-ring" />
+          <div className="photo-wrapper">
             <img src={`${process.env.PUBLIC_URL}/home.png`} alt="Ankur Verma" className="home-image" />
-            <div className="orbit orbit-1">
-              <span className="planet planet-go" title="Go">
-                Go
-              </span>
-            </div>
-            <div className="orbit orbit-2">
-              <span className="planet planet-python" title="Python">
-                Py
-              </span>
-            </div>
-            <div className="orbit orbit-3">
-              <span className="planet planet-react" title="React">
-                UI
-              </span>
-            </div>
           </div>
           <div className="hero-side-card">
-            <span className="section-label">Command brief</span>
-            <h2>Case studies, field notes, and live demos in one place.</h2>
+            <h2>Projects, writing, and demos — all in one place.</h2>
             <p>
-              The portfolio is organized for fast signal: resume path, project deep dives, current focus, and
-              interactive systems demos that explain how I think about software.
+              The site is organized for quick browsing: resume, project deep-dives,
+              what I'm working on now, and interactive demos.
             </p>
             <Link to="/launchpad" className="hero-inline-link">
-              <FaRocket /> Launch demos
+              Browse demos
             </Link>
           </div>
         </motion.div>
@@ -103,8 +80,8 @@ const Home = () => {
 
       <section className="home-section">
         <div className="home-section-heading">
-          <span className="section-label">Featured case studies</span>
-          <h2>Work that maps directly to platform, backend, and AI infrastructure roles.</h2>
+          <span className="section-label">Selected work</span>
+          <h2>Projects spanning platform engineering, backend systems, and AI infrastructure.</h2>
         </div>
         <div className="feature-grid">
           {featuredProjects.map((project) => (
@@ -118,7 +95,7 @@ const Home = () => {
                 ))}
               </div>
               <div className="feature-link-row">
-                Read case study <FaArrowRight />
+                Read more <FaArrowRight />
               </div>
             </Link>
           ))}
@@ -127,22 +104,17 @@ const Home = () => {
 
       <section className="home-section">
         <div className="home-section-heading">
-          <span className="section-label">Recent field notes</span>
-          <h2>Writing focused on systems behavior, AI infrastructure, and implementation tradeoffs.</h2>
+          <span className="section-label">Writing</span>
+          <h2>Notes on systems, infrastructure, and implementation tradeoffs.</h2>
         </div>
         <div className="feature-grid notes-grid">
-          {featuredPosts.slice(0, 3).map((post) => (
-            <Link key={post.slug} to={`/blog/${post.slug}`} className="feature-card note-card">
-              <span className="feature-eyebrow">{post.readTime}</span>
+          {featuredPosts.map((post) => (
+            <Link key={post.slug} to={`/blog/${post.slug}`} className="feature-card">
+              <span className="feature-eyebrow">{post.eyebrow}</span>
               <h3>{post.title}</h3>
-              <p>{post.excerpt}</p>
-              <div className="feature-tag-row">
-                {post.tags.slice(0, 3).map((tag) => (
-                  <span key={tag}>{tag}</span>
-                ))}
-              </div>
+              <p>{post.summary}</p>
               <div className="feature-link-row">
-                Read note <FaArrowRight />
+                Read post <FaArrowRight />
               </div>
             </Link>
           ))}

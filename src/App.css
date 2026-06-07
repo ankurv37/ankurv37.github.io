@@ -1,7 +1,7 @@
 .app-container {
-  background: #05060f;
+  background: #0a0c14;
   min-height: 100vh;
-  color: #cdd6f4;
+  color: #b8c0d4;
   position: relative;
   overflow-x: hidden;
 }
@@ -17,16 +17,16 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #05060f;
+  background: #0a0c14;
   border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #7c9bff;
+  background: rgba(140, 160, 200, 0.3);
   border-radius: 6px;
-  border: 2px solid #05060f;
+  border: 2px solid #0a0c14;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #c4b5fd;
+  background: rgba(140, 160, 200, 0.5);
 }

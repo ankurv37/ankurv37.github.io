@@ -16,7 +16,7 @@ const LogicGateVisualizer = React.lazy(() => import('./LogicGateVisualizer'));
 const FullAdderVisualizer = React.lazy(() => import('./FullAdderVisualizer'));
 
 const MainContainer = styled.main`
-  margin-left: 250px;
+  margin-left: 240px;
   padding: 2rem;
   min-height: 100vh;
   position: relative;
@@ -24,7 +24,7 @@ const MainContainer = styled.main`
   
   @media (max-width: 768px) {
     margin-left: 0;
-    padding: 4rem 1rem 1rem 1rem; /* Top padding for hamburger menu */
+    padding: 4rem 1rem 1rem 1rem;
     width: 100%;
     overflow-x: hidden;
   }
@@ -35,8 +35,8 @@ const LoadingFallback = styled.div`
   align-items: center;
   justify-content: center;
   min-height: 40vh;
-  color: rgba(205, 214, 244, 0.68);
-  font-size: 1rem;
+  color: rgba(184, 192, 212, 0.5);
+  font-size: 0.9rem;
 `;
 
 const MainContent = () => {

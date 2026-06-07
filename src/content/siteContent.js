@@ -52,10 +52,10 @@ export const profileLinks = {
 };
 
 export const heroContent = {
-  eyebrow: 'Platform Engineering + Systems Design',
-  headline: "Building quiet systems that work well under pressure.",
+  eyebrow: 'About',
+  headline: "I build platforms and backend systems.",
   summary:
-    'Senior engineer with 12+ years across platform engineering, distributed systems, and developer tooling. I like building things that stay calm when complexity shows up.',
+    '12+ years of engineering work across internal platforms, distributed systems, Kubernetes, and developer tooling. Currently interested in AI infrastructure and event-driven architectures.',
   proofChips: [
     'Go',
     'Distributed Systems',
@@ -65,25 +65,20 @@ export const heroContent = {
   ],
   impactStats: [
     {
-      label: 'Developer users supported',
-      value: '4000+',
-      detail: 'Internal platform and provisioning workflows used across 50+ product teams.',
+      label: 'Developer users',
+      value: '4,000+',
+      detail: 'Internal platform used across 50+ product teams for provisioning and SDLC workflows.',
     },
     {
       label: 'Services migrated',
-      value: '2000+',
-      detail: 'Cloud and Kubernetes migrations spanning APIs, portals, and platform services.',
+      value: '2,000+',
+      detail: 'Cloud and Kubernetes migrations — APIs, portals, platform services.',
     },
     {
-      label: 'Years building systems',
+      label: 'Years',
       value: '12+',
-      detail: 'Backend, platform, DevOps, and event-driven architectures across enterprise environments.',
+      detail: 'Backend, platform, DevOps, and event-driven work in enterprise environments.',
     },
-  ],
-  recruiterNotes: [
-    'Best fit: Senior or Staff backend/platform roles.',
-    'Primary focus: cloud platforms, eventing, AI infrastructure, and systems design.',
-    'Location: Mason, Ohio. Open to US remote and hybrid roles.',
   ],
 };
 
@@ -95,26 +90,26 @@ export const nowStatus = {
     'AI agents, local inference, and developer tooling',
   ],
   currentFocus: [
-    'Designing interactive systems demos that explain real operational tradeoffs.',
-    'Exploring local AI stacks with MCP servers, RAG pipelines, and quantized inference.',
-    'Refining case studies that connect hands-on code with platform impact and migration outcomes.',
+    'Building interactive demos that show real operational tradeoffs.',
+    'Exploring local AI stacks — MCP servers, RAG pipelines, quantized inference.',
+    'Writing up case studies connecting code with platform impact.',
   ],
   recentShips: [
     {
       title: 'Event Mesh Lab',
       detail:
-        'A new interactive systems demo for partitioning, consumer lag, retries, and dead-letter flow.',
+        'Interactive demo for partitioning, consumer lag, retries, and dead-letter flow.',
       href: '/event-mesh-lab',
     },
     {
-      title: 'Portfolio control center refresh',
+      title: 'Portfolio refresh',
       detail:
-        'Restructured the portfolio around case studies, searchable notes, and recruiter-facing navigation.',
+        'Restructured the site around case studies and cleaner navigation.',
       href: '/projects/portfolio-control-center',
     },
     {
-      title: 'GitHub Pulse cleanup',
-      detail: 'Switched the activity view from the global GitHub firehose to user-specific public events.',
+      title: 'GitHub activity view',
+      detail: 'Switched from the global GitHub firehose to user-specific public events.',
       href: '/github',
     },
   ],
@@ -133,7 +128,7 @@ export const nowStatus = {
     label: 'Now',
     title: 'Open to platform and AI infra roles',
     detail:
-      'Working at the intersection of cloud platforms, eventing, and AI tooling. Best way to reach me is LinkedIn.',
+      'Working on cloud platforms, eventing, and AI tooling. Best way to reach me is LinkedIn.',
   },
 };
 
