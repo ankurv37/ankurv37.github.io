@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -237,6 +237,13 @@ const SocialLink = styled.a`
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsDesktop(window.innerWidth > 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const projectLinks = projects.slice(0, 4);
   const postLinks = posts.slice(0, 6);
@@ -273,7 +280,7 @@ const Navigation = () => {
       <Nav
         initial={false}
         animate={{
-          x: isOpen || window.innerWidth > 768 ? 0 : -310,
+          x: isOpen || isDesktop ? 0 : -310,
         }}
         transition={{ type: 'spring', stiffness: 330, damping: 34 }}
       >

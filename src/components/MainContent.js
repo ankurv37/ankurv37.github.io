@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Home from './Home/Home';
 import Blog from './Blog/Blog';
 import Projects from './Projects/ProjectList';
-import LogicGateVisualizer from './LogicGateVisualizer';
-import FullAdderVisualizer from './FullAdderVisualizer';
-import GitHubActivity from './GitHubActivity';
-import ChaosDemo from './ChaosDemo';
-import PongGame from './PongGame/PongGame';
 import LaunchPad from './LaunchPad';
 import Resume from './Resume/Resume';
 import Now from './Now/Now';
-import EventMeshLab from './EventMeshLab';
+
+const ChaosDemo = React.lazy(() => import('./ChaosDemo'));
+const GitHubActivity = React.lazy(() => import('./GitHubActivity'));
+const PongGame = React.lazy(() => import('./PongGame/PongGame'));
+const EventMeshLab = React.lazy(() => import('./EventMeshLab'));
+const LogicGateVisualizer = React.lazy(() => import('./LogicGateVisualizer'));
+const FullAdderVisualizer = React.lazy(() => import('./FullAdderVisualizer'));
 
 const MainContainer = styled.main`
   margin-left: 250px;
@@ -29,25 +30,36 @@ const MainContainer = styled.main`
   }
 `;
 
+const LoadingFallback = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+  color: rgba(205, 214, 244, 0.68);
+  font-size: 1rem;
+`;
+
 const MainContent = () => {
   return (
     <MainContainer>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/resume" element={<Resume />} />
-        <Route path="/now" element={<Now />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:slug" element={<Blog />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/projects/:slug" element={<Projects />} />
-        <Route path="/logic-gates" element={<LogicGateVisualizer />} />
-        <Route path="/adder" element={<FullAdderVisualizer />} />
-        <Route path="/github" element={<GitHubActivity />} />
-        <Route path="/chaos" element={<ChaosDemo />} />
-        <Route path="/pongwars" element={<PongGame />} />
-        <Route path="/event-mesh-lab" element={<EventMeshLab />} />
-        <Route path="/launchpad" element={<LaunchPad />} />
-      </Routes>
+      <Suspense fallback={<LoadingFallback>Loading…</LoadingFallback>}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/resume" element={<Resume />} />
+          <Route path="/now" element={<Now />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<Blog />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:slug" element={<Projects />} />
+          <Route path="/logic-gates" element={<LogicGateVisualizer />} />
+          <Route path="/adder" element={<FullAdderVisualizer />} />
+          <Route path="/github" element={<GitHubActivity />} />
+          <Route path="/chaos" element={<ChaosDemo />} />
+          <Route path="/pongwars" element={<PongGame />} />
+          <Route path="/event-mesh-lab" element={<EventMeshLab />} />
+          <Route path="/launchpad" element={<LaunchPad />} />
+        </Routes>
+      </Suspense>
     </MainContainer>
   );
 };

@@ -23,6 +23,13 @@ async function buildPosts() {
     const raw = fs.readFileSync(path.join(POSTS_DIR, file), 'utf-8');
     const { data, content } = matter(raw);
 
+    const requiredFields = ['slug', 'title', 'date'];
+    const missing = requiredFields.filter(f => !data[f]);
+    if (missing.length > 0) {
+      console.warn(`⚠ Skipping ${file}: missing required fields: ${missing.join(', ')}`);
+      return null;
+    }
+
     // Convert markdown body to HTML
     const contentHtml = marked(content);
 
@@ -36,7 +43,7 @@ async function buildPosts() {
       featured: data.featured || false,
       contentHtml,
     };
-  });
+  }).filter(Boolean);
 
   // Sort by date descending
   posts.sort((a, b) => new Date(b.date) - new Date(a.date));
