@@ -17,7 +17,7 @@ const GitHubActivity = ({ username = 'ankurv37' }) => {
     const fetchCommitData = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`https://api.github.com/events`);
+        const response = await fetch(`https://api.github.com/users/${username}/events/public`);
         
         if (!response.ok) {
           throw new Error(`GitHub API error: ${response.status}`);

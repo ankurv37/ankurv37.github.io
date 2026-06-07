@@ -28,6 +28,7 @@ type ClusterState struct {
 }
 
 var (
+	rng         = rand.New(rand.NewSource(time.Now().UnixNano()))
 	cluster     ClusterState
 	faultConfig = map[string]bool{
 		"networkPartition": false,
@@ -57,11 +58,11 @@ func initializeCluster(this js.Value, args []js.Value) interface{} {
 		cluster.Nodes[i] = Node{
 			ID:          generateNodeID(i),
 			Status:      "healthy",
-			CPUUsage:    rand.Float64()*20 + 10, // 10-30% baseline
-			Memory:      rand.Float64()*30 + 20, // 20-50% baseline
+			CPUUsage:    rng.Float64()*20 + 10, // 10-30% baseline
+			Memory:      rng.Float64()*30 + 20, // 20-50% baseline
 			Network:     true,
 			LastSeen:    time.Now().Unix(),
-			RequestRate: rand.Intn(50) + 20, // 20-70 RPS baseline
+			RequestRate: rng.Intn(50) + 20, // 20-70 RPS baseline
 		}
 	}
 
@@ -137,9 +138,9 @@ func simulateCluster(this js.Value, args []js.Value) interface{} {
 	for i := range cluster.Nodes {
 		if cluster.Nodes[i].Status == "healthy" {
 			// Small random fluctuations
-			cluster.Nodes[i].CPUUsage += (rand.Float64() - 0.5) * 5
-			cluster.Nodes[i].Memory += (rand.Float64() - 0.5) * 3
-			cluster.Nodes[i].RequestRate += rand.Intn(10) - 5
+			cluster.Nodes[i].CPUUsage += (rng.Float64() - 0.5) * 5
+			cluster.Nodes[i].Memory += (rng.Float64() - 0.5) * 3
+			cluster.Nodes[i].RequestRate += rng.Intn(10) - 5
 
 			// Keep within bounds
 			cluster.Nodes[i].CPUUsage = clamp(cluster.Nodes[i].CPUUsage, 5, 95)
@@ -196,12 +197,12 @@ func continueNetworkPartition() {
 
 func injectCPUSpike() {
 	// Spike CPU on 2-3 random nodes
-	affected := rand.Intn(2) + 2
+	affected := rng.Intn(2) + 2
 	for i := 0; i < affected && i < len(cluster.Nodes); i++ {
-		idx := rand.Intn(len(cluster.Nodes))
+		idx := rng.Intn(len(cluster.Nodes))
 		if cluster.Nodes[idx].Status == "healthy" {
 			cluster.Nodes[idx].Status = "degraded"
-			cluster.Nodes[idx].CPUUsage = rand.Float64()*20 + 80 // 80-100%
+			cluster.Nodes[idx].CPUUsage = rng.Float64()*20 + 80 // 80-100%
 		}
 	}
 }
@@ -209,7 +210,7 @@ func injectCPUSpike() {
 func continueCPUSpike() {
 	for i := range cluster.Nodes {
 		if cluster.Nodes[i].Status == "degraded" && cluster.Nodes[i].CPUUsage > 70 {
-			cluster.Nodes[i].CPUUsage = rand.Float64()*15 + 85 // Keep high
+			cluster.Nodes[i].CPUUsage = rng.Float64()*15 + 85 // Keep high
 			cluster.Nodes[i].RequestRate = cluster.Nodes[i].RequestRate / 2 // Reduce throughput
 		}
 	}
@@ -219,8 +220,8 @@ func healCPUSpike() {
 	for i := range cluster.Nodes {
 		if cluster.Nodes[i].Status == "degraded" && cluster.Nodes[i].CPUUsage > 70 {
 			cluster.Nodes[i].Status = "healthy"
-			cluster.Nodes[i].CPUUsage = rand.Float64()*20 + 15 // Back to normal
-			cluster.Nodes[i].RequestRate = rand.Intn(50) + 30  // Restore throughput
+			cluster.Nodes[i].CPUUsage = rng.Float64()*20 + 15 // Back to normal
+			cluster.Nodes[i].RequestRate = rng.Intn(50) + 30  // Restore throughput
 		}
 	}
 }
@@ -228,7 +229,7 @@ func healCPUSpike() {
 func injectNodeCrash() {
 	// Crash 1-2 random healthy nodes
 	crashed := 0
-	maxCrash := rand.Intn(2) + 1
+	maxCrash := rng.Intn(2) + 1
 	
 	for i := range cluster.Nodes {
 		if cluster.Nodes[i].Status == "healthy" && crashed < maxCrash {
@@ -258,9 +259,9 @@ func healNodeCrash() {
 	for i := range cluster.Nodes {
 		if cluster.Nodes[i].Status == "crashed" {
 			cluster.Nodes[i].Status = "healthy"
-			cluster.Nodes[i].CPUUsage = rand.Float64()*20 + 15
-			cluster.Nodes[i].Memory = rand.Float64()*30 + 25
-			cluster.Nodes[i].RequestRate = rand.Intn(50) + 25
+			cluster.Nodes[i].CPUUsage = rng.Float64()*20 + 15
+			cluster.Nodes[i].Memory = rng.Float64()*30 + 25
+			cluster.Nodes[i].RequestRate = rng.Intn(50) + 25
 			cluster.Nodes[i].Network = true
 		}
 	}
@@ -268,12 +269,12 @@ func healNodeCrash() {
 
 func injectMemoryLeak() {
 	// Start memory leak on 1-2 nodes
-	affected := rand.Intn(2) + 1
+	affected := rng.Intn(2) + 1
 	for i := 0; i < affected && i < len(cluster.Nodes); i++ {
-		idx := rand.Intn(len(cluster.Nodes))
+		idx := rng.Intn(len(cluster.Nodes))
 		if cluster.Nodes[idx].Status == "healthy" {
 			cluster.Nodes[idx].Status = "degraded"
-			cluster.Nodes[idx].Memory = rand.Float64()*10 + 70 // Start high
+			cluster.Nodes[idx].Memory = rng.Float64()*10 + 70 // Start high
 		}
 	}
 }
@@ -282,7 +283,7 @@ func continueMemoryLeak() {
 	for i := range cluster.Nodes {
 		if cluster.Nodes[i].Status == "degraded" && cluster.Nodes[i].Memory > 60 {
 			// Memory keeps growing
-			cluster.Nodes[i].Memory = clamp(cluster.Nodes[i].Memory+rand.Float64()*5, 0, 95)
+			cluster.Nodes[i].Memory = clamp(cluster.Nodes[i].Memory+rng.Float64()*5, 0, 95)
 			if cluster.Nodes[i].Memory > 90 {
 				cluster.Nodes[i].RequestRate = cluster.Nodes[i].RequestRate / 3 // Severe degradation
 			}
@@ -294,8 +295,8 @@ func healMemoryLeak() {
 	for i := range cluster.Nodes {
 		if cluster.Nodes[i].Status == "degraded" && cluster.Nodes[i].Memory > 60 {
 			cluster.Nodes[i].Status = "healthy"
-			cluster.Nodes[i].Memory = rand.Float64()*20 + 25 // Back to normal
-			cluster.Nodes[i].RequestRate = rand.Intn(50) + 30
+			cluster.Nodes[i].Memory = rng.Float64()*20 + 25 // Back to normal
+			cluster.Nodes[i].RequestRate = rng.Intn(50) + 30
 		}
 	}
 }

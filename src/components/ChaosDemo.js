@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { 
   FaServer, 
@@ -10,12 +10,15 @@ import {
   FaPause,
   FaRedo
 } from 'react-icons/fa';
+import { useWasmModule } from '../hooks/useWasmModule';
 import MissionBanner from './MissionBanner';
 import './ChaosDemo.css';
 
+const CHAOS_GLOBALS = ['initializeCluster', 'toggleFault', 'simulateCluster'];
+
 const ChaosDemo = () => {
+  const { ready: wasmReady, fns, error } = useWasmModule('/chaos.wasm', CHAOS_GLOBALS);
   const [clusterState, setClusterState] = useState(null);
-  const [wasmReady, setWasmReady] = useState(false);
   const [isSimulating, setIsSimulating] = useState(false);
   const [faultStates, setFaultStates] = useState({
     networkPartition: false,
@@ -23,68 +26,55 @@ const ChaosDemo = () => {
     nodeCrash: false,
     memoryLeak: false
   });
-  const [error, setError] = useState(null);
 
-  // Load WASM module
+  const initializeClusterFn = useMemo(() => fns.initializeCluster, [fns]);
+  const simulateClusterFn = useMemo(() => fns.simulateCluster, [fns]);
+  const toggleFaultFn = useMemo(() => fns.toggleFault, [fns]);
+
+  // Initialize cluster once WASM is ready
   useEffect(() => {
-    const loadChaosWasm = async () => {
-      try {
-        if (!window.Go) {
-          const script = document.createElement('script');
-          script.src = '/wasm_exec.js';
-          script.onload = () => initializeChaosWasm();
-          script.onerror = () => setError('Failed to load wasm_exec.js');
-          document.head.appendChild(script);
-        } else {
-          initializeChaosWasm();
-        }
+    if (wasmReady && initializeClusterFn && !clusterState) {
+      const initialState = initializeClusterFn(6);
+      setClusterState(JSON.parse(initialState));
+    }
+  }, [wasmReady, initializeClusterFn, clusterState]);
 
-        async function initializeChaosWasm() {
-          try {
-            const go = new window.Go();
-            const result = await WebAssembly.instantiateStreaming(
-              fetch('/chaos.wasm'), 
-              go.importObject
-            );
-            
-            go.run(result.instance);
-            
-            setTimeout(() => {
-              if (window.initializeCluster && window.toggleFault && window.simulateCluster) {
-                // Initialize cluster with 6 nodes
-                const initialState = window.initializeCluster(6);
-                setClusterState(JSON.parse(initialState));
-                setWasmReady(true);
-              } else {
-                setError('Chaos WASM functions not found');
-              }
-            }, 100);
-          } catch (err) {
-            setError(`Chaos WASM initialization failed: ${err.message}`);
-          }
-        }
-      } catch (err) {
-        setError(`Chaos WASM loading failed: ${err.message}`);
+  // Simulation loop with visibilitychange pause
+  const simulatingRef = useRef(isSimulating);
+  simulatingRef.current = isSimulating;
+
+  useEffect(() => {
+    let interval;
+
+    const start = () => {
+      if (!simulatingRef.current || !wasmReady || !simulateClusterFn) return;
+      interval = setInterval(() => {
+        const newState = simulateClusterFn();
+        setClusterState(JSON.parse(newState));
+      }, 1000);
+    };
+
+    const stop = () => clearInterval(interval);
+
+    const handleVisibility = () => {
+      if (document.hidden) {
+        stop();
+      } else {
+        start();
       }
     };
 
-    loadChaosWasm();
-  }, []);
+    start();
+    document.addEventListener('visibilitychange', handleVisibility);
 
-  // Simulation loop
-  useEffect(() => {
-    let interval;
-    if (isSimulating && wasmReady) {
-      interval = setInterval(() => {
-        const newState = window.simulateCluster();
-        setClusterState(JSON.parse(newState));
-      }, 1000); // Update every second
-    }
-    return () => clearInterval(interval);
-  }, [isSimulating, wasmReady]);
+    return () => {
+      stop();
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
+  }, [isSimulating, wasmReady, simulateClusterFn]);
 
   const toggleFault = useCallback((faultType) => {
-    if (!wasmReady) return;
+    if (!wasmReady || !toggleFaultFn) return;
     
     const newEnabled = !faultStates[faultType];
     setFaultStates(prev => ({
@@ -92,17 +82,17 @@ const ChaosDemo = () => {
       [faultType]: newEnabled
     }));
 
-    const newState = window.toggleFault(faultType, newEnabled);
+    const newState = toggleFaultFn(faultType, newEnabled);
     setClusterState(JSON.parse(newState));
-  }, [faultStates, wasmReady]);
+  }, [faultStates, wasmReady, toggleFaultFn]);
 
   const resetCluster = useCallback(() => {
-    if (!wasmReady) return;
+    if (!wasmReady || !toggleFaultFn || !initializeClusterFn) return;
     
     // Reset all faults
     Object.keys(faultStates).forEach(faultType => {
       if (faultStates[faultType]) {
-        window.toggleFault(faultType, false);
+        toggleFaultFn(faultType, false);
       }
     });
     
@@ -114,9 +104,9 @@ const ChaosDemo = () => {
     });
 
     // Reinitialize cluster
-    const initialState = window.initializeCluster(6);
+    const initialState = initializeClusterFn(6);
     setClusterState(JSON.parse(initialState));
-  }, [faultStates, wasmReady]);
+  }, [faultStates, wasmReady, toggleFaultFn, initializeClusterFn]);
 
   const getNodeStatusColor = (node) => {
     switch (node.status) {
