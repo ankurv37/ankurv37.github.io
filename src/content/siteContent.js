@@ -63,23 +63,6 @@ export const heroContent = {
     'Developer Platforms',
     'AI Infrastructure',
   ],
-  impactStats: [
-    {
-      label: 'Developer users',
-      value: '4,000+',
-      detail: 'Internal platform used across 50+ product teams for provisioning and SDLC workflows.',
-    },
-    {
-      label: 'Services migrated',
-      value: '2,000+',
-      detail: 'Cloud and Kubernetes migrations — APIs, portals, platform services.',
-    },
-    {
-      label: 'Years',
-      value: '12+',
-      detail: 'Backend, platform, DevOps, and event-driven work in enterprise environments.',
-    },
-  ],
 };
 
 export const nowStatus = {

@@ -62,22 +62,6 @@ const Home = () => {
         </motion.div>
       </section>
 
-      <section className="impact-grid">
-        {heroContent.impactStats.map((stat, index) => (
-          <motion.article
-            key={stat.label}
-            className="impact-card"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.12 + index * 0.06 }}
-          >
-            <strong>{stat.value}</strong>
-            <span>{stat.label}</span>
-            <p>{stat.detail}</p>
-          </motion.article>
-        ))}
-      </section>
-
       <section className="home-section">
         <div className="home-section-heading">
           <span className="section-label">Selected work</span>
