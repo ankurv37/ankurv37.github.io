@@ -3,23 +3,20 @@
 }
 
 .school {
-  background: linear-gradient(135deg, #00ff95 0%, #00d4aa 50%, #0099cc 100%);
-  background-size: 200% 200%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 0.5rem;
-  font-size: 1.3rem;
-}
-
-.degree {
-  color: #ffffff;
+  color: #dce1ed;
+  font-weight: 600;
   margin-bottom: 0.5rem;
   font-size: 1.1rem;
 }
 
+.degree {
+  color: rgba(184, 192, 212, 0.85);
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
 .period {
-  color: #ffffff;
-  font-size: 0.9rem;
+  color: rgba(160, 175, 210, 0.6);
+  font-size: 0.85rem;
   margin-bottom: 1rem;
 }

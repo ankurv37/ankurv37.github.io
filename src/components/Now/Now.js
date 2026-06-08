@@ -20,11 +20,11 @@ const Now = () => {
         transition={{ duration: 0.45 }}
       >
         <div className="now-hero-copy">
-          <span className="now-eyebrow">Current signal</span>
-          <h1>What I am building, optimizing for, and open to right now.</h1>
+          <span className="now-eyebrow">Now</span>
+          <h1>What I'm working on and looking for.</h1>
           <p>
-            {nowStatus.availability} I am strongest where platform thinking, backend execution, and operational
-            tradeoffs all matter.
+            {nowStatus.availability} I do my best work where platform thinking, backend execution,
+            and operational tradeoffs all matter.
           </p>
           <div className="now-meta-row">
             <span>
@@ -89,8 +89,8 @@ const Now = () => {
         transition={{ duration: 0.45, delay: 0.2 }}
       >
         <div className="now-section-heading">
-          <span className="now-eyebrow">Recently shipped</span>
-          <h2>Recent work on the site and surrounding portfolio systems.</h2>
+          <span className="now-eyebrow">Recent</span>
+          <h2>Things I've shipped recently.</h2>
         </div>
         <div className="now-ship-list">
           {nowStatus.recentShips.map((item) => (
