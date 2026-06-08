@@ -6,14 +6,6 @@
   margin-bottom: 2rem;
 }
 
-.category-image {
-  max-width: 220px;
-  height: auto;
-  margin-bottom: 1rem;
-  border-radius: 8px;
-  opacity: 0.85;
-}
-
 .skill-category h3 {
   color: #dce1ed;
   font-weight: 600;
