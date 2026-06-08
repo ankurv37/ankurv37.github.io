@@ -8,7 +8,6 @@
 }
 
 .home-hero,
-.feature-card,
 .hero-side-card {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -53,7 +52,6 @@
 }
 
 .proof-chip-row,
-.feature-tag-row,
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
@@ -64,8 +62,7 @@
   margin: 1.4rem 0 1.5rem;
 }
 
-.proof-chip,
-.feature-tag-row span {
+.proof-chip {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -113,8 +110,7 @@
 .hero-primary-action:hover,
 .hero-secondary-action:hover,
 .hero-tertiary-action:hover,
-.hero-inline-link:hover,
-.feature-card:hover {
+.hero-inline-link:hover {
   transform: translateY(-1px);
 }
 
@@ -168,98 +164,16 @@
   font-size: 0.85rem;
 }
 
-.home-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-.home-section-heading h2 {
-  margin: 0.35rem 0 0;
-  max-width: 700px;
-  color: #dce1ed;
-  font-weight: 600;
-  line-height: 1.2;
-  font-size: 1.3rem;
-}
-
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-}
-
-.feature-card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-  padding: 1.4rem;
-  text-decoration: none;
-  transition: transform 0.15s ease, border-color 0.2s ease, background 0.2s ease;
-}
-
-.feature-card:hover {
-  border-color: rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.feature-eyebrow {
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(160, 175, 210, 0.65);
-}
-
-.feature-card h3 {
-  margin: 0;
-  color: #dce1ed;
-  font-weight: 600;
-  font-size: 1.05rem;
-}
-
-.feature-card p {
-  margin: 0;
-  color: rgba(184, 192, 212, 0.72);
-  line-height: 1.55;
-  font-size: 0.9rem;
-}
-
-.feature-link-row {
-  margin-top: auto;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  color: rgba(160, 175, 210, 0.8);
-  font-weight: 500;
-  font-size: 0.85rem;
-}
-
-.feature-card:hover .feature-link-row {
-  color: #c5cde0;
-}
-
 @media (max-width: 1080px) {
-  .home-hero,
-  .feature-grid {
+  .home-hero {
     grid-template-columns: 1fr;
-  }
-
-  .impact-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 720px) {
   .home-copy,
-  .hero-side-card,
-  .impact-card,
-  .feature-card {
+  .hero-side-card {
     padding: 1.2rem;
-  }
-
-  .impact-grid {
-    grid-template-columns: 1fr;
   }
 
   .photo-wrapper {

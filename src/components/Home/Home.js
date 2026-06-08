@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaArrowRight, FaCompass, FaFileAlt } from 'react-icons/fa';
-import { featuredPosts, featuredProjects, heroContent } from '../../content/siteContent';
+import { heroContent } from '../../content/siteContent';
 import './Home.css';
 
 const Home = () => {
@@ -60,49 +60,6 @@ const Home = () => {
             </Link>
           </div>
         </motion.div>
-      </section>
-
-      <section className="home-section">
-        <div className="home-section-heading">
-          <span className="section-label">Selected work</span>
-          <h2>Projects spanning platform engineering, backend systems, and AI infrastructure.</h2>
-        </div>
-        <div className="feature-grid">
-          {featuredProjects.map((project) => (
-            <Link key={project.slug} to={`/projects/${project.slug}`} className="feature-card">
-              <span className="feature-eyebrow">{project.eyebrow}</span>
-              <h3>{project.title}</h3>
-              <p>{project.summary}</p>
-              <div className="feature-tag-row">
-                {project.stack.slice(0, 4).map((item) => (
-                  <span key={item}>{item}</span>
-                ))}
-              </div>
-              <div className="feature-link-row">
-                Read more <FaArrowRight />
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="home-section">
-        <div className="home-section-heading">
-          <span className="section-label">Writing</span>
-          <h2>Notes on systems, infrastructure, and implementation tradeoffs.</h2>
-        </div>
-        <div className="feature-grid notes-grid">
-          {featuredPosts.map((post) => (
-            <Link key={post.slug} to={`/blog/${post.slug}`} className="feature-card">
-              <span className="feature-eyebrow">{post.eyebrow}</span>
-              <h3>{post.title}</h3>
-              <p>{post.summary}</p>
-              <div className="feature-link-row">
-                Read post <FaArrowRight />
-              </div>
-            </Link>
-          ))}
-        </div>
       </section>
     </div>
   );
