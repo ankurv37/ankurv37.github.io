@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" fill="none">
+  <!-- Database cylinder 1 -->
+  <ellipse cx="56" cy="36" rx="28" ry="10" stroke="rgba(68,184,243,0.4)" stroke-width="1.5" fill="rgba(68,184,243,0.05)"/>
+  <path d="M28 36 L28 72" stroke="rgba(68,184,243,0.4)" stroke-width="1.5"/>
+  <path d="M84 36 L84 72" stroke="rgba(68,184,243,0.4)" stroke-width="1.5"/>
+  <ellipse cx="56" cy="72" rx="28" ry="10" stroke="rgba(68,184,243,0.4)" stroke-width="1.5" fill="rgba(68,184,243,0.05)"/>
+  <!-- Middle ring -->
+  <ellipse cx="56" cy="54" rx="28" ry="10" stroke="rgba(68,184,243,0.15)" stroke-width="1"/>
+  <!-- Data rows inside -->
+  <rect x="40" y="42" width="32" height="3" rx="1.5" fill="rgba(160,175,210,0.15)"/>
+  <rect x="40" y="48" width="24" height="3" rx="1.5" fill="rgba(160,175,210,0.12)"/>
+  <!-- Arrow from DB to message -->
+  <path d="M84 54 L108 54" stroke="rgba(160,175,210,0.3)" stroke-width="1.2" marker-end="url(#arrowhead)"/>
+  <defs>
+    <marker id="arrowhead" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="rgba(160,175,210,0.4)"/>
+    </marker>
+  </defs>
+  <!-- Message envelope -->
+  <rect x="112" y="38" width="56" height="32" rx="4" stroke="rgba(200,170,255,0.4)" stroke-width="1.5" fill="rgba(200,170,255,0.04)"/>
+  <!-- Envelope flap -->
+  <path d="M112 38 L140 58 L168 38" stroke="rgba(200,170,255,0.3)" stroke-width="1" fill="none"/>
+  <!-- Signal waves from envelope -->
+  <path d="M172 46 C176 44 176 48 180 46" stroke="rgba(160,175,210,0.3)" stroke-width="1" fill="none"/>
+  <path d="M172 54 C176 52 176 56 180 54" stroke="rgba(160,175,210,0.25)" stroke-width="1" fill="none"/>
+  <!-- Queue dots below -->
+  <circle cx="120" cy="88" r="5" stroke="rgba(160,175,210,0.3)" stroke-width="1" fill="rgba(255,255,255,0.02)"/>
+  <circle cx="136" cy="88" r="5" stroke="rgba(160,175,210,0.3)" stroke-width="1" fill="rgba(255,255,255,0.02)"/>
+  <circle cx="152" cy="88" r="5" stroke="rgba(160,175,210,0.3)" stroke-width="1" fill="rgba(255,255,255,0.02)"/>
+  <line x1="125" y1="88" x2="131" y2="88" stroke="rgba(160,175,210,0.2)" stroke-width="1"/>
+  <line x1="141" y1="88" x2="147" y2="88" stroke="rgba(160,175,210,0.2)" stroke-width="1"/>
+  <!-- Label: queue -->
+  <circle cx="120" cy="88" r="2" fill="rgba(100,200,150,0.4)"/>
+  <circle cx="136" cy="88" r="2" fill="rgba(68,184,243,0.4)"/>
+  <circle cx="152" cy="88" r="2" fill="rgba(200,170,255,0.4)"/>
+</svg>

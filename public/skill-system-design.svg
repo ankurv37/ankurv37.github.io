@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" fill="none">
+  <!-- Central node -->
+  <rect x="76" y="40" width="48" height="28" rx="6" stroke="rgba(68,184,243,0.45)" stroke-width="1.5" fill="rgba(68,184,243,0.06)"/>
+  <rect x="86" y="49" width="28" height="3" rx="1.5" fill="rgba(160,175,210,0.25)"/>
+  <rect x="86" y="56" width="20" height="3" rx="1.5" fill="rgba(160,175,210,0.15)"/>
+  <!-- Top left node -->
+  <rect x="10" y="10" width="40" height="24" rx="5" stroke="rgba(100,200,150,0.4)" stroke-width="1.2" fill="rgba(100,200,150,0.04)"/>
+  <rect x="18" y="18" width="24" height="3" rx="1.5" fill="rgba(160,175,210,0.18)"/>
+  <rect x="18" y="24" width="16" height="3" rx="1.5" fill="rgba(160,175,210,0.12)"/>
+  <!-- Top right node -->
+  <rect x="150" y="10" width="40" height="24" rx="5" stroke="rgba(200,170,255,0.4)" stroke-width="1.2" fill="rgba(200,170,255,0.04)"/>
+  <rect x="158" y="18" width="24" height="3" rx="1.5" fill="rgba(160,175,210,0.18)"/>
+  <rect x="158" y="24" width="16" height="3" rx="1.5" fill="rgba(160,175,210,0.12)"/>
+  <!-- Bottom left node -->
+  <rect x="10" y="82" width="40" height="24" rx="5" stroke="rgba(255,180,100,0.4)" stroke-width="1.2" fill="rgba(255,180,100,0.04)"/>
+  <rect x="18" y="90" width="24" height="3" rx="1.5" fill="rgba(160,175,210,0.18)"/>
+  <rect x="18" y="96" width="16" height="3" rx="1.5" fill="rgba(160,175,210,0.12)"/>
+  <!-- Bottom right node -->
+  <rect x="150" y="82" width="40" height="24" rx="5" stroke="rgba(68,184,243,0.35)" stroke-width="1.2" fill="rgba(68,184,243,0.04)"/>
+  <rect x="158" y="90" width="24" height="3" rx="1.5" fill="rgba(160,175,210,0.18)"/>
+  <rect x="158" y="96" width="16" height="3" rx="1.5" fill="rgba(160,175,210,0.12)"/>
+  <!-- Connection lines -->
+  <line x1="50" y1="26" x2="76" y2="46" stroke="rgba(160,175,210,0.2)" stroke-width="1.2"/>
+  <line x1="150" y1="26" x2="124" y2="46" stroke="rgba(160,175,210,0.2)" stroke-width="1.2"/>
+  <line x1="50" y1="90" x2="76" y2="64" stroke="rgba(160,175,210,0.2)" stroke-width="1.2"/>
+  <line x1="150" y1="90" x2="124" y2="64" stroke="rgba(160,175,210,0.2)" stroke-width="1.2"/>
+  <!-- Small dots at connection points -->
+  <circle cx="76" cy="46" r="2" fill="rgba(68,184,243,0.4)"/>
+  <circle cx="124" cy="46" r="2" fill="rgba(68,184,243,0.4)"/>
+  <circle cx="76" cy="64" r="2" fill="rgba(68,184,243,0.4)"/>
+  <circle cx="124" cy="64" r="2" fill="rgba(68,184,243,0.4)"/>
+</svg>

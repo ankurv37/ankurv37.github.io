@@ -10,11 +10,21 @@ const Skills = () => {
     "System Design": ["Microservices", "Event-Driven Architecture", "Caching Strategy", "Multi-region distributed systems"]
   };
 
+  const categoryIllustrations = {
+    "Programming Stack": `${process.env.PUBLIC_URL}/skill-programming.svg`,
+    "Cloud & DevOps": `${process.env.PUBLIC_URL}/skill-cloud.svg`,
+    "Databases & Messaging": `${process.env.PUBLIC_URL}/skill-database.svg`,
+    "System Design": `${process.env.PUBLIC_URL}/skill-system-design.svg`,
+  };
+
   return (
     <div className="skills-container">
       <h2>Skills</h2>
       {Object.entries(skills).map(([category, items]) => (
         <div className="skill-category" key={category}>
+          {categoryIllustrations[category] && (
+            <img src={categoryIllustrations[category]} alt={category} className="category-illustration" />
+          )}
           <h3>{category}</h3>
           <div className="skill-list">
             {items.map((skill, index) => (
