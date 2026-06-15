@@ -6,6 +6,13 @@
   margin-bottom: 2rem;
 }
 
+.category-illustration {
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 0.8rem;
+  opacity: 0.9;
+}
+
 .skill-category h3 {
   color: #dce1ed;
   font-weight: 600;
